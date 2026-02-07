@@ -62,8 +62,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <nav className="bottomnav" aria-label="Primary">
         <NavItem to="/" label="Home" icon={<HomeIcon size={18} />} end />
         <NavItem to="/messages" label="Messages" icon={<MessageSquare size={18} />} />
-        <NavItem to="/profiles" label="Profiles" icon={<Users size={18} />} />
         <NavItem to="/images" label="Images" icon={<ImageIcon size={18} />} />
+        <NavItem to="/email" label="Email" icon={<Mail size={18} />} />
         <NavItem to="/more" label="More" icon={<MoreHorizontal size={18} />} />
       </nav>
 

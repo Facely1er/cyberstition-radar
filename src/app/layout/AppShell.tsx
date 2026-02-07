@@ -72,7 +72,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <NavItem to="/profiles" label="Profiles" icon={<Users size={18} />} />
         <NavItem to="/images" label="Images" icon={<ImageIcon size={18} />} />
         <NavItem to="/email" label="Email" icon={<Mail size={18} />} />
-        <NavItem to="/more" label="More" icon={<MoreHorizontal size={18} />} />
       </nav>
 
       <footer className="footer">

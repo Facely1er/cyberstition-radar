@@ -552,7 +552,7 @@ hr{
   display:block;
 }
 
-.brand-subtitle{
+.brand span.brand-subtitle{
   font-size:14.5px;
   color:var(--text-secondary);
 }
@@ -763,7 +763,7 @@ hr{
     font-size:10px;
   }
 
-  .brand-subtitle{
+  .brand span.brand-subtitle{
     font-size:13.5px;
   }
 
@@ -899,7 +899,7 @@ hr{
     font-size:9px;
   }
 
-  .brand-subtitle{
+  .brand span.brand-subtitle{
     font-size:12.5px;
   }
 
@@ -945,7 +945,7 @@ hr{
     font-size:9px;
   }
 
-  .brand-subtitle{
+  .brand span.brand-subtitle{
     font-size:12px;
   }
 

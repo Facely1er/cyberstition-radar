@@ -25,6 +25,52 @@ const SocialProfileVerifier: React.FC = () => {
 
   const addAlert = useCautionStore((s) => s.addAlert);
 
+  // Extract username from URL
+  const extractUsernameFromUrl = (url: string): string | null => {
+    try {
+      const urlObj = new URL(url);
+      const pathname = urlObj.pathname;
+      
+      // Twitter/X: twitter.com/username or x.com/username
+      if (urlObj.hostname.includes('twitter.com') || urlObj.hostname.includes('x.com')) {
+        const match = pathname.match(/\/([^\/]+)/);
+        return match ? match[1] : null;
+      }
+      
+      // Instagram: instagram.com/username
+      if (urlObj.hostname.includes('instagram.com')) {
+        const match = pathname.match(/\/([^\/]+)/);
+        return match ? match[1] : null;
+      }
+      
+      // Facebook: facebook.com/username
+      if (urlObj.hostname.includes('facebook.com')) {
+        const match = pathname.match(/\/([^\/]+)/);
+        return match ? match[1] : null;
+      }
+      
+      // LinkedIn: linkedin.com/in/username
+      if (urlObj.hostname.includes('linkedin.com')) {
+        const match = pathname.match(/\/in\/([^\/]+)/);
+        return match ? match[1] : null;
+      }
+      
+      return null;
+    } catch {
+      return null;
+    }
+  };
+
+  const handleUrlSubmit = () => {
+    if (!profileUrl.trim()) return;
+    
+    const username = extractUsernameFromUrl(profileUrl);
+    if (username) {
+      setProfileData(prev => ({ ...prev, username }));
+      setProfileUrl(''); // Clear URL after extraction
+    }
+  };
+
   const handleChange = (field: string, value: string | boolean) => {
     setProfileData(prev => ({ ...prev, [field]: value }));
   };
@@ -396,52 +442,6 @@ const SocialProfileVerifier: React.FC = () => {
       </div>
     </>
   );
-
-  // Extract username from URL
-  const extractUsernameFromUrl = (url: string): string | null => {
-    try {
-      const urlObj = new URL(url);
-      const pathname = urlObj.pathname;
-      
-      // Twitter/X: twitter.com/username or x.com/username
-      if (urlObj.hostname.includes('twitter.com') || urlObj.hostname.includes('x.com')) {
-        const match = pathname.match(/\/([^\/]+)/);
-        return match ? match[1] : null;
-      }
-      
-      // Instagram: instagram.com/username
-      if (urlObj.hostname.includes('instagram.com')) {
-        const match = pathname.match(/\/([^\/]+)/);
-        return match ? match[1] : null;
-      }
-      
-      // Facebook: facebook.com/username
-      if (urlObj.hostname.includes('facebook.com')) {
-        const match = pathname.match(/\/([^\/]+)/);
-        return match ? match[1] : null;
-      }
-      
-      // LinkedIn: linkedin.com/in/username
-      if (urlObj.hostname.includes('linkedin.com')) {
-        const match = pathname.match(/\/in\/([^\/]+)/);
-        return match ? match[1] : null;
-      }
-      
-      return null;
-    } catch {
-      return null;
-    }
-  };
-
-  const handleUrlSubmit = () => {
-    if (!profileUrl.trim()) return;
-    
-    const username = extractUsernameFromUrl(profileUrl);
-    if (username) {
-      setProfileData(prev => ({ ...prev, username }));
-      setProfileUrl(''); // Clear URL after extraction
-    }
-  };
 
   return (
     <div className="max-w-4xl mx-auto">

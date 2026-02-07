@@ -1,7 +1,7 @@
 // Image Metadata Analyzer Component
 // Analyzes image files for suspicious metadata patterns
 
-import React, { useState, Suspense, useEffect, useRef } from 'react';
+import React, { useState, Suspense, useEffect, useRef, useCallback } from 'react';
 import { Image, Upload, AlertTriangle, ShieldCheck, XCircle, Info, Loader2, Download } from 'lucide-react';
 import { analyzeImageMetadata, getImageRiskLevel } from '../../utils/imageMetadataAnalyzer';
 import { mapImageAnalysisToAlert } from '../../mappers/imageToCautionAlert';
@@ -18,7 +18,7 @@ const ImageMetadataAnalyzer: React.FC = () => {
 
   const addAlert = useCautionStore((s) => s.addAlert);
 
-  const processFile = (selectedFile: File) => {
+  const processFile = useCallback((selectedFile: File) => {
     // Validate file type
     if (!selectedFile.type.startsWith('image/')) {
       setError('Please select an image file');
@@ -41,7 +41,7 @@ const ImageMetadataAnalyzer: React.FC = () => {
       setPreview(e.target?.result as string);
     };
     reader.readAsDataURL(selectedFile);
-  };
+  }, []);
 
   // Clipboard paste support
   useEffect(() => {
@@ -65,7 +65,7 @@ const ImageMetadataAnalyzer: React.FC = () => {
 
     window.addEventListener('paste', handlePaste);
     return () => window.removeEventListener('paste', handlePaste);
-  }, [file]);
+  }, [file, processFile]);
 
   // Drag and drop support
   useEffect(() => {
@@ -104,7 +104,7 @@ const ImageMetadataAnalyzer: React.FC = () => {
       dropZone.removeEventListener('dragleave', handleDragLeave);
       dropZone.removeEventListener('drop', handleDrop);
     };
-  }, []);
+  }, [processFile]);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];

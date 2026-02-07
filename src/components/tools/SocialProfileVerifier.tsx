@@ -355,11 +355,11 @@ const SocialProfileVerifier: React.FC = () => {
       <div className="mt-8 p-6 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 border border-cyan-200 dark:border-cyan-800 rounded-xl">
         <h3 className="font-semibold text-gray-900 dark:text-white mb-2">💡 What to look for:</h3>
         <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li>• Generic or auto-generated usernames</li>
-          <li>• Very new accounts with suspicious activity</li>
-          <li>• Unusual follower/following ratios</li>
-          <li>• Empty bios or suspicious promotional content</li>
-          <li>• Accounts following many but having zero followers</li>
+          <li>Generic or auto-generated usernames</li>
+          <li>Very new accounts with suspicious activity</li>
+          <li>Unusual follower/following ratios</li>
+          <li>Empty bios or suspicious promotional content</li>
+          <li>Accounts following many but having zero followers</li>
         </ul>
       </div>
     </>

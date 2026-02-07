@@ -273,11 +273,11 @@ const AICheckMessagePanel: React.FC = () => {
           💡 Remember: Legitimate services never...
         </h3>
         <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li>• Create artificial urgency or pressure you to act immediately</li>
-          <li>• Threaten account suspension without prior warning through official channels</li>
-          <li>• Ask for sensitive information (passwords, SSN, credit cards) via email or text</li>
-          <li>• Use generic greetings when they have your account information</li>
-          <li>• Send links that lead to suspicious or misspelled domains</li>
+          <li>Create artificial urgency or pressure you to act immediately</li>
+          <li>Threaten account suspension without prior warning through official channels</li>
+          <li>Ask for sensitive information (passwords, SSN, credit cards) via email or text</li>
+          <li>Use generic greetings when they have your account information</li>
+          <li>Send links that lead to suspicious or misspelled domains</li>
         </ul>
       </div>
     </>

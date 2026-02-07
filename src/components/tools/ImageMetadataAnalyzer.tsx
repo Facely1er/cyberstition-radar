@@ -264,11 +264,11 @@ const ImageMetadataAnalyzer: React.FC = () => {
       <div className="mt-8 p-6 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 border border-cyan-200 dark:border-cyan-800 rounded-xl">
         <h3 className="font-semibold text-gray-900 dark:text-white mb-2">💡 What to look for:</h3>
         <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li>• Missing or manipulated EXIF metadata</li>
-          <li>• Future dates in creation timestamps</li>
-          <li>• Editing software signatures</li>
-          <li>• Unusual dimensions or file sizes</li>
-          <li>• Always verify images through reverse image search</li>
+          <li>Missing or manipulated EXIF metadata</li>
+          <li>Future dates in creation timestamps</li>
+          <li>Editing software signatures</li>
+          <li>Unusual dimensions or file sizes</li>
+          <li>Always verify images through reverse image search</li>
         </ul>
       </div>
     </>

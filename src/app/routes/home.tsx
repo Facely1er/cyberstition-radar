@@ -7,7 +7,6 @@ export default function Home() {
   return (
     <div className="grid" style={{ gap: 14 }}>
       <section className="card">
-        <div className="kicker"><Sparkles size={16} /> Digital Signal Insights</div>
         <h1 className="h1">Question what looks real online.</h1>
         <p className="p">
           Cyberstition helps you recognize scams, fake profiles, manipulated images, and suspicious emails using on-device indicators.

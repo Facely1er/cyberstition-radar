@@ -1,6 +1,7 @@
 import React from 'react';
 import TrustNotice from '../../components/common/TrustNotice';
 import EmailHeaderAnalyzer from '../../components/tools/EmailHeaderAnalyzer';
+import NextSteps from '../../components/common/NextSteps';
 
 export default function Email() {
   return (
@@ -13,6 +14,8 @@ export default function Email() {
       <section className="card">
         <EmailHeaderAnalyzer />
       </section>
+
+      <NextSteps entryPoint="email" />
 
       <TrustNotice />
     </div>

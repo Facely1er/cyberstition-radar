@@ -9,6 +9,7 @@ import Profiles from './app/routes/profiles';
 import Images from './app/routes/images';
 import Email from './app/routes/email';
 import About from './app/routes/about';
+import More from './app/routes/more';
 import Login from './app/routes/login';
 import Signup from './app/routes/signup';
 import Dashboard from './app/routes/dashboard';
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/images" element={<Images />} />
           <Route path="/email" element={<Email />} />
           <Route path="/about" element={<About />} />
+          <Route path="/more" element={<More />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route

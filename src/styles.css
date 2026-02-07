@@ -437,7 +437,7 @@ hr{
 }
 
 .header .brand strong{
-  font-size:14px;
+  font-size:12px;
 }
 
 .brand span{
@@ -447,7 +447,8 @@ hr{
 }
 
 .brand-subtitle{
-  color:var(--text-secondary);
+  color:var(--text);
+  font-size:13px;
 }
 
 .brand-subtext{

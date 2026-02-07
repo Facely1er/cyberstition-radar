@@ -48,9 +48,56 @@ export default function About() {
         <h2 className="h2">Frequently Asked Questions</h2>
         <div style={{ marginTop: 16 }}>
           <div style={{ marginBottom: 20 }}>
-            <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>How do I purchase the app?</h3>
+            <h3 className="h3">How do I purchase the app?</h3>
             <p className="small" style={{ opacity: 0.9 }}>
               Download from the Play Store. One-time purchase of {priceLabel}, no subscription required.
+            </p>
+          </div>
+          
+          <div style={{ marginBottom: 20 }}>
+            <h3 className="h3">How accurate are the risk indicators?</h3>
+            <p className="small" style={{ opacity: 0.9 }}>
+              Cyberstition provides risk indicators based on common patterns and signals. These are not guarantees—they help inform your judgment. 
+              Always verify suspicious content through independent channels. False positives and false negatives are possible.
+            </p>
+          </div>
+
+          <div style={{ marginBottom: 20 }}>
+            <h3 className="h3">What types of threats does it detect?</h3>
+            <p className="small" style={{ opacity: 0.9 }}>
+              Cyberstition analyzes messages for phishing, scam patterns, and AI-generated manipulation. It checks social profiles for authenticity signals, 
+              inspects image metadata for manipulation indicators, and analyzes email headers for spoofing. It does not detect malware or block threats.
+            </p>
+          </div>
+
+          <div style={{ marginBottom: 20 }}>
+            <h3 className="h3">Does it work offline?</h3>
+            <p className="small" style={{ opacity: 0.9 }}>
+              Yes! All analysis happens on your device. Once the app is loaded, you can use all tools without an internet connection. 
+              No data is sent to external servers.
+            </p>
+          </div>
+
+          <div style={{ marginBottom: 20 }}>
+            <h3 className="h3">What browsers/devices are supported?</h3>
+            <p className="small" style={{ opacity: 0.9 }}>
+              Cyberstition works in modern browsers (Chrome, Firefox, Safari, Edge) on desktop and mobile devices. 
+              The app version is available on Android via the Play Store.
+            </p>
+          </div>
+
+          <div style={{ marginBottom: 20 }}>
+            <h3 className="h3">Is my data private?</h3>
+            <p className="small" style={{ opacity: 0.9 }}>
+              Yes. All analysis runs on your device. No content, reports, or personal information is sent to any server. 
+              Reports are stored locally in your browser. Clearing browser data will remove saved reports.
+            </p>
+          </div>
+
+          <div style={{ marginBottom: 20 }}>
+            <h3 className="h3">Can I get a refund?</h3>
+            <p className="small" style={{ opacity: 0.9 }}>
+              Refund policies are handled through the Play Store. Please refer to Google's refund policy for app purchases.
             </p>
           </div>
         </div>

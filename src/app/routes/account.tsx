@@ -35,7 +35,7 @@ export default function Preferences() {
       </div>
 
       <section className="card">
-        <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <h2 className="h2" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Settings size={20} /> Analysis Preferences
         </h2>
         <div className="small" style={{ marginBottom: 16, opacity: 0.8 }}>
@@ -144,14 +144,8 @@ export default function Preferences() {
               <select
                 value={preferences.analysisHistory}
                 onChange={(e) => handlePreferenceChange('analysisHistory', Number(e.target.value))}
-                style={{
-                  width: '100%',
-                  padding: '10px 12px',
-                  border: '1px solid #e0e0e0',
-                  borderRadius: 6,
-                  fontSize: 15,
-                  backgroundColor: 'white',
-                }}
+                className="input"
+                style={{ fontSize: 15 }}
               >
                 <option value={7}>7 days</option>
                 <option value={14}>14 days</option>
@@ -165,7 +159,7 @@ export default function Preferences() {
       </section>
 
       <section className="card">
-        <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <h2 className="h2" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Download size={20} /> Get the App
         </h2>
         <div className="grid" style={{ gap: 12 }}>
@@ -184,7 +178,7 @@ export default function Preferences() {
       </section>
 
       <section className="card">
-        <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <h2 className="h2" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Info size={20} /> About
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -197,7 +191,7 @@ export default function Preferences() {
       </section>
 
       <section className="card">
-        <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <h2 className="h2" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Shield size={20} /> Security & Privacy
         </h2>
 

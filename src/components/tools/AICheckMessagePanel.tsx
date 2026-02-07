@@ -1,13 +1,11 @@
 // AI-Style Phishing Risk Analysis Tool
 // User-facing component for analyzing suspicious messages
 
-import React, { useState } from 'react';
-import { Brain, AlertTriangle, ShieldCheck, XCircle, HelpCircle, Info } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Brain, AlertTriangle, ShieldCheck, XCircle, HelpCircle, Info, Download } from 'lucide-react';
 import { analyzeMessageForPhishingRisk } from '../../utils/aiRiskDetector';
 import { mapAIRiskToAlert } from '../../mappers/aiToCautionAlert';
 import { useCautionStore } from '../../state/cautionStore';
-import { consumeFreeUse } from '../../config/products';
-import Paywall from '../common/Paywall';
 
 const AICheckMessagePanel: React.FC = () => {
   const [text, setText] = useState('');
@@ -21,13 +19,8 @@ const AICheckMessagePanel: React.FC = () => {
   const addAlert = useCautionStore((s) => s.addAlert);
 
   const handleAnalyze = () => {
-    // Check and consume free use if available
-    const allowed = consumeFreeUse('ai_message_detector');
-    if (!allowed) {
-      // Paywall will block UI as well, but keep this as a hard stop.
-      alert('Free limit reached. Upgrade for unlimited access (not wired yet).');
-      return;
-    }
+    if (!text.trim()) return;
+
     const risk = analyzeMessageForPhishingRisk(text);
     setResult(risk);
 
@@ -49,7 +42,7 @@ const AICheckMessagePanel: React.FC = () => {
 
   // Free preview (description + privacy notice)
   const freePreview = (
-    <div className="mb-8">
+    <div className="mb-6">
       <div className="flex items-center justify-between mb-4">
         <p className="text-gray-600 dark:text-gray-400">
           Paste suspicious messages to surface common phishing, scam, and manipulation patterns.
@@ -117,6 +110,7 @@ const AICheckMessagePanel: React.FC = () => {
             Paste message content here:
           </label>
           <textarea
+            ref={textareaRef}
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows={8}
@@ -124,7 +118,7 @@ const AICheckMessagePanel: React.FC = () => {
                        bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                        focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent
                        placeholder-gray-400 dark:placeholder-gray-500"
-            placeholder="Example: URGENT! Your account will be suspended within 24 hours. Click here to verify your identity immediately..."
+            placeholder="Example: URGENT! Your account will be suspended within 24 hours. Click here to verify your identity immediately... (Auto-pastes from clipboard on focus)"
           />
           <div className="flex justify-between items-center mt-2">
             <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -151,6 +145,27 @@ const AICheckMessagePanel: React.FC = () => {
           >
             <Brain className="h-4 w-4 mr-2" />
             Analyze for Risks
+          </button>
+          
+          <button
+            onClick={async () => {
+              try {
+                const clipboardText = await navigator.clipboard.readText();
+                if (clipboardText) {
+                  setText(clipboardText);
+                }
+              } catch (err) {
+                // Fallback: just clear
+                handleClear();
+              }
+            }}
+            className="inline-flex items-center px-6 py-3 rounded-lg text-sm font-medium 
+                       border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 
+                       hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            title="Paste from clipboard"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Paste
           </button>
           
           <button
@@ -283,15 +298,34 @@ const AICheckMessagePanel: React.FC = () => {
     </>
   );
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-paste from clipboard on focus
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const handleFocus = async () => {
+      if (text.trim()) return; // Don't auto-paste if there's already text
+      
+      try {
+        const clipboardText = await navigator.clipboard.readText();
+        if (clipboardText.length > 10 && clipboardText.length < 10000) {
+          setText(clipboardText);
+        }
+      } catch (err) {
+        // Clipboard API not available or permission denied
+      }
+    };
+
+    textarea.addEventListener('focus', handleFocus);
+    return () => textarea.removeEventListener('focus', handleFocus);
+  }, [text]);
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <Paywall
-        productId="ai_message_detector"
-        freePreview={freePreview}
-        lockedContent={lockedContent}
-        customTitle="Unlock Message Detective"
-        customBody="Get unlimited runs and advanced explanations (Pro unlock not wired yet)."
-      />
+    <div className="max-w-4xl mx-auto">
+      {freePreview}
+      {lockedContent}
     </div>
   );
 };

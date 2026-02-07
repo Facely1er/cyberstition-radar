@@ -1,15 +1,11 @@
 // Image Metadata Analyzer Component
 // Analyzes image files for suspicious metadata patterns
 
-import React, { useState, Suspense } from 'react';
-import { Image, Upload, AlertTriangle, ShieldCheck, XCircle, Info, Loader2 } from 'lucide-react';
+import React, { useState, Suspense, useEffect, useRef } from 'react';
+import { Image, Upload, AlertTriangle, ShieldCheck, XCircle, Info, Loader2, Download } from 'lucide-react';
 import { analyzeImageMetadata, getImageRiskLevel } from '../../utils/imageMetadataAnalyzer';
 import { mapImageAnalysisToAlert } from '../../mappers/imageToCautionAlert';
 import { useCautionStore } from '../../state/cautionStore';
-import { consumeFreeUse } from '../../config/products';
-
-// Import Paywall directly (not lazy) to avoid React initialization issues
-import Paywall from '../common/Paywall';
 
 const ImageMetadataAnalyzer: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -17,13 +13,75 @@ const ImageMetadataAnalyzer: React.FC = () => {
   const [result, setResult] = useState<any>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dropZoneRef = useRef<HTMLDivElement>(null);
 
   const addAlert = useCautionStore((s) => s.addAlert);
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (!selectedFile) return;
+  // Clipboard paste support
+  useEffect(() => {
+    const handlePaste = async (e: ClipboardEvent) => {
+      if (file) return; // Don't paste if file already selected
+      
+      const items = e.clipboardData?.items;
+      if (items) {
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          if (item.type.indexOf('image') !== -1) {
+            const blob = item.getAsFile();
+            if (blob) {
+              const pastedFile = new File([blob], 'pasted-image.png', { type: blob.type });
+              processFile(pastedFile);
+            }
+          }
+        }
+      }
+    };
 
+    window.addEventListener('paste', handlePaste);
+    return () => window.removeEventListener('paste', handlePaste);
+  }, [file]);
+
+  // Drag and drop support
+  useEffect(() => {
+    const dropZone = dropZoneRef.current;
+    if (!dropZone) return;
+
+    const handleDragOver = (e: DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(true);
+    };
+
+    const handleDragLeave = (e: DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(false);
+    };
+
+    const handleDrop = (e: DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(false);
+
+      const droppedFiles = e.dataTransfer?.files;
+      if (droppedFiles && droppedFiles.length > 0) {
+        processFile(droppedFiles[0]);
+      }
+    };
+
+    dropZone.addEventListener('dragover', handleDragOver);
+    dropZone.addEventListener('dragleave', handleDragLeave);
+    dropZone.addEventListener('drop', handleDrop);
+
+    return () => {
+      dropZone.removeEventListener('dragover', handleDragOver);
+      dropZone.removeEventListener('dragleave', handleDragLeave);
+      dropZone.removeEventListener('drop', handleDrop);
+    };
+  }, []);
+
+  const processFile = (selectedFile: File) => {
     // Validate file type
     if (!selectedFile.type.startsWith('image/')) {
       setError('Please select an image file');
@@ -48,6 +106,12 @@ const ImageMetadataAnalyzer: React.FC = () => {
     reader.readAsDataURL(selectedFile);
   };
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) return;
+    processFile(selectedFile);
+  };
+
   const handleAnalyze = async () => {
     if (!file) return;
 
@@ -55,13 +119,6 @@ const ImageMetadataAnalyzer: React.FC = () => {
     setError(null);
 
     try {
-      // Check and consume free use if available
-      const allowed = consumeFreeUse('ai_image_analyzer');
-      if (!allowed) {
-        alert('Free limit reached. Upgrade for unlimited access (not wired yet).');
-        return;
-      }
-      
       const analysis = await analyzeImageMetadata(file);
       setResult(analysis);
 
@@ -90,7 +147,7 @@ const ImageMetadataAnalyzer: React.FC = () => {
 
   // Free preview (description and privacy notice)
   const freePreview = (
-    <div className="mb-8">
+    <div className="mb-6">
       <p className="text-gray-600 dark:text-gray-400 mb-4">
         Upload an image to analyze its metadata for signs of manipulation or suspicious patterns
       </p>
@@ -110,7 +167,14 @@ const ImageMetadataAnalyzer: React.FC = () => {
       {/* Upload Area */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 space-y-4 mb-6">
         {!preview ? (
-          <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-12 text-center">
+          <div 
+            ref={dropZoneRef}
+            className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
+              isDragging 
+                ? 'border-cyan-500 bg-cyan-50 dark:bg-cyan-900/20' 
+                : 'border-gray-300 dark:border-gray-600'
+            }`}
+          >
             <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
             <label className="cursor-pointer">
               <span className="text-cyan-500 hover:text-purple-700 font-medium">
@@ -123,7 +187,9 @@ const ImageMetadataAnalyzer: React.FC = () => {
                 className="hidden"
               />
             </label>
-            <p className="text-sm text-gray-500 mt-2">JPG, PNG, GIF, WebP up to 50MB</p>
+            <p className="text-sm text-gray-500 mt-2">
+              JPG, PNG, GIF, WebP up to 50MB • Or drag & drop • Or paste from clipboard
+            </p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -275,14 +341,9 @@ const ImageMetadataAnalyzer: React.FC = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <Paywall
-        productId="ai_image_analyzer"
-        freePreview={freePreview}
-        lockedContent={lockedContent}
-        customTitle="Unlock Image Inspector"
-        customBody="Get access to advanced image metadata analysis to detect manipulation and suspicious patterns. Included in Standard Plan."
-      />
+    <div className="max-w-4xl mx-auto">
+      {freePreview}
+      {lockedContent}
     </div>
   );
 };

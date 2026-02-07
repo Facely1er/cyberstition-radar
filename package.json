@@ -5,8 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:web": "vite --mode web",
+    "dev:app": "cross-env BUILD_TARGET=app vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "build:web": "tsc -b && cross-env BUILD_TARGET=web vite build",
+    "build:app": "tsc -b && cross-env BUILD_TARGET=app vite build",
+    "preview": "vite preview",
+    "preview:web": "vite preview --outDir dist/web",
+    "preview:app": "vite preview --outDir dist/app"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
@@ -20,6 +26,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "cross-env": "^7.0.3",
     "typescript": "^5.5.4",
     "vite": "^5.4.3"
   }

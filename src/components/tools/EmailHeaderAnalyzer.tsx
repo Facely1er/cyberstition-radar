@@ -1,13 +1,11 @@
 // Email Header Analyzer Component
 // Analyzes email headers for phishing and spoofing indicators
 
-import React, { useState } from 'react';
-import { Mail, AlertTriangle, ShieldCheck, XCircle, Info, HelpCircle } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Mail, AlertTriangle, ShieldCheck, XCircle, Info, HelpCircle, Download } from 'lucide-react';
 import { analyzeEmailHeaders, getEmailRiskLevel } from '../../utils/emailHeaderAnalyzer';
 import { mapEmailAnalysisToAlert } from '../../mappers/emailToCautionAlert';
 import { useCautionStore } from '../../state/cautionStore';
-import { consumeFreeUse } from '../../config/products';
-import Paywall from '../common/Paywall';
 
 const EmailHeaderAnalyzer: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
@@ -19,17 +17,8 @@ const EmailHeaderAnalyzer: React.FC = () => {
   const handleAnalyze = () => {
     if (!headerText.trim()) return;
 
-    // Check and consume free use if available
-    const allowed = consumeFreeUse('ai_email_analyzer');
-    if (!allowed) {
-      alert('Free limit reached. Upgrade for unlimited access (not wired yet).');
-      return;
-    }
-
     const analysis = analyzeEmailHeaders(headerText);
     setResult(analysis);
-
-    // Free use consumed - user will see paywall on next use when limit is reached
 
     // Create alert if suspicious
     if (analysis.isSuspicious) {
@@ -52,7 +41,7 @@ const EmailHeaderAnalyzer: React.FC = () => {
 
   // Free preview (description and privacy notice)
   const freePreview = (
-    <div className="mb-8">
+    <div className="mb-6">
       <p className="text-gray-600 dark:text-gray-400 mb-4">
         Paste email headers to analyze for spoofing, authentication failures, and phishing indicators
       </p>
@@ -114,6 +103,7 @@ const EmailHeaderAnalyzer: React.FC = () => {
             Paste email headers here:
           </label>
           <textarea
+            ref={textareaRef}
             value={headerText}
             onChange={(e) => setHeaderText(e.target.value)}
             rows={12}
@@ -121,7 +111,7 @@ const EmailHeaderAnalyzer: React.FC = () => {
                        bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                        focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent
                        placeholder-gray-400 dark:placeholder-gray-500 font-mono"
-            placeholder="From: sender@example.com&#10;To: recipient@example.com&#10;Subject: Test Email&#10;Date: Mon, 1 Jan 2024 12:00:00 +0000&#10;Authentication-Results: ..."
+            placeholder="From: sender@example.com&#10;To: recipient@example.com&#10;Subject: Test Email&#10;Date: Mon, 1 Jan 2024 12:00:00 +0000&#10;Authentication-Results: ... (Auto-detects from clipboard on focus)"
           />
         </div>
 
@@ -137,6 +127,27 @@ const EmailHeaderAnalyzer: React.FC = () => {
           >
             <Mail className="h-4 w-4 mr-2" />
             Analyze Headers
+          </button>
+          
+          <button
+            onClick={async () => {
+              try {
+                const clipboardText = await navigator.clipboard.readText();
+                if (clipboardText) {
+                  setHeaderText(clipboardText);
+                }
+              } catch (err) {
+                // Fallback: just clear
+                handleClear();
+              }
+            }}
+            className="inline-flex items-center px-6 py-3 rounded-lg text-sm font-medium 
+                       border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 
+                       hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            title="Paste from clipboard"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Paste
           </button>
           
           <button
@@ -270,15 +281,35 @@ const EmailHeaderAnalyzer: React.FC = () => {
     </>
   );
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-detect email headers from clipboard on focus
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const handleFocus = async () => {
+      if (headerText.trim()) return; // Don't auto-paste if there's already text
+      
+      try {
+        const clipboardText = await navigator.clipboard.readText();
+        // Check if it looks like email headers
+        if (clipboardText.includes('From:') && clipboardText.includes('To:')) {
+          setHeaderText(clipboardText);
+        }
+      } catch (err) {
+        // Clipboard API not available or permission denied
+      }
+    };
+
+    textarea.addEventListener('focus', handleFocus);
+    return () => textarea.removeEventListener('focus', handleFocus);
+  }, [headerText]);
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <Paywall
-        productId="ai_email_analyzer"
-        freePreview={freePreview}
-        lockedContent={lockedContent}
-        customTitle="Unlock Email Analyzer"
-        customBody="Get access to advanced email header analysis to detect phishing and spoofing indicators. Included in Standard Plan."
-      />
+    <div className="max-w-4xl mx-auto">
+      {freePreview}
+      {lockedContent}
     </div>
   );
 };

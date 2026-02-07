@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { FileText, Trash2, Clock, Settings, Home } from 'lucide-react';
+import { FileText, Trash2, Clock, Settings, Home, Download, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { usePreferences } from '../../contexts/PreferencesContext';
 
 interface Report {
   id: string;
@@ -25,9 +26,55 @@ export default function Dashboard() {
   const [allDocuments, setAllDocuments] = useLocalStorage<Document[]>('cyberstition_documents', []);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<'reports' | 'documents'>('reports');
+  const { preferences, updatePreferences } = usePreferences();
 
   const reports = allReports;
   const documents = allDocuments;
+
+  const exportData = () => {
+    const data = {
+      reports: allReports,
+      documents: allDocuments,
+      preferences: preferences,
+      exportDate: new Date().toISOString(),
+      version: '1.0'
+    };
+    
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `cyberstition-backup-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const importData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target?.result as string);
+        if (confirm('This will replace your current data. Continue?')) {
+          if (data.reports) setAllReports(data.reports);
+          if (data.documents) setAllDocuments(data.documents);
+          if (data.preferences) {
+            updatePreferences(data.preferences);
+          }
+          alert('Data imported successfully!');
+        }
+      } catch (err) {
+        alert('Invalid backup file. Please check the file format.');
+      }
+    };
+    reader.readAsText(file);
+    // Reset input
+    event.target.value = '';
+  };
 
   const deleteReport = (id: string) => {
     if (!confirm('Are you sure you want to delete this report?')) return;
@@ -74,6 +121,22 @@ export default function Dashboard() {
             <Link to="/account" className="btn" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <Settings size={16} /> Preferences
             </Link>
+            <button
+              onClick={exportData}
+              className="btn"
+              style={{ display: 'flex', gap: 8, alignItems: 'center' }}
+            >
+              <Download size={16} /> Export
+            </button>
+            <label className="btn" style={{ display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer' }}>
+              <Upload size={16} /> Import
+              <input
+                type="file"
+                accept=".json"
+                onChange={importData}
+                style={{ display: 'none' }}
+              />
+            </label>
           </div>
         </div>
       </section>

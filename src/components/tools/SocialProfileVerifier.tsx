@@ -1,13 +1,11 @@
 // Social Media Profile Verifier Component
 // Analyzes social media profiles for fake or AI-generated account indicators
 
-import React, { useState } from 'react';
-import { User, AlertTriangle, ShieldCheck, XCircle, Info } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { User, AlertTriangle, ShieldCheck, XCircle, Info, Download } from 'lucide-react';
 import { analyzeSocialProfile, getProfileRiskLevel } from '../../utils/socialProfileVerifier';
 import { mapProfileAnalysisToAlert } from '../../mappers/profileToCautionAlert';
 import { useCautionStore } from '../../state/cautionStore';
-import { consumeFreeUse } from '../../config/products';
-import Paywall from '../common/Paywall';
 
 const SocialProfileVerifier: React.FC = () => {
   const [profileData, setProfileData] = useState({
@@ -23,6 +21,7 @@ const SocialProfileVerifier: React.FC = () => {
     website: ''
   });
   const [result, setResult] = useState<any>(null);
+  const [profileUrl, setProfileUrl] = useState('');
 
   const addAlert = useCautionStore((s) => s.addAlert);
 
@@ -31,13 +30,6 @@ const SocialProfileVerifier: React.FC = () => {
   };
 
   const handleAnalyze = () => {
-    // Check and consume free use if available
-    const allowed = consumeFreeUse('ai_profile_verifier');
-    if (!allowed) {
-      alert('Free limit reached. Upgrade for unlimited access (not wired yet).');
-      return;
-    }
-
     const analysis = analyzeSocialProfile({
       username: profileData.username || undefined,
       displayName: profileData.displayName || undefined,
@@ -85,7 +77,7 @@ const SocialProfileVerifier: React.FC = () => {
 
   // Free preview (description and privacy notice)
   const freePreview = (
-    <div className="mb-8">
+    <div className="mb-6">
       <p className="text-gray-600 dark:text-gray-400 mb-4">
         Enter profile information to analyze for fake, bot, or AI-generated account indicators
       </p>
@@ -102,6 +94,46 @@ const SocialProfileVerifier: React.FC = () => {
   // Locked content (the actual tool)
   const lockedContent = (
     <>
+      {/* URL Input for Quick Fill */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 mb-4">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Quick Fill: Paste Profile URL (Twitter, Instagram, Facebook, LinkedIn)
+        </label>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={profileUrl}
+            onChange={(e) => setProfileUrl(e.target.value)}
+            onPaste={(e) => {
+              const pastedUrl = e.clipboardData.getData('text');
+              setTimeout(() => {
+                setProfileUrl(pastedUrl);
+                const username = extractUsernameFromUrl(pastedUrl);
+                if (username) {
+                  setProfileData(prev => ({ ...prev, username }));
+                  setProfileUrl('');
+                }
+              }, 0);
+            }}
+            placeholder="https://twitter.com/username or https://instagram.com/username"
+            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+                       bg-white dark:bg-gray-900 text-gray-900 dark:text-white
+                       focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          />
+          <button
+            onClick={handleUrlSubmit}
+            disabled={!profileUrl.trim()}
+            className="px-4 py-2 bg-cyan-600 text-white rounded-lg text-sm font-medium
+                       hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Extract
+          </button>
+        </div>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+          Automatically extracts username from profile URLs
+        </p>
+      </div>
+
       {/* Input Form */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 space-y-4 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -365,15 +397,56 @@ const SocialProfileVerifier: React.FC = () => {
     </>
   );
 
+  // Extract username from URL
+  const extractUsernameFromUrl = (url: string): string | null => {
+    try {
+      const urlObj = new URL(url);
+      const pathname = urlObj.pathname;
+      
+      // Twitter/X: twitter.com/username or x.com/username
+      if (urlObj.hostname.includes('twitter.com') || urlObj.hostname.includes('x.com')) {
+        const match = pathname.match(/\/([^\/]+)/);
+        return match ? match[1] : null;
+      }
+      
+      // Instagram: instagram.com/username
+      if (urlObj.hostname.includes('instagram.com')) {
+        const match = pathname.match(/\/([^\/]+)/);
+        return match ? match[1] : null;
+      }
+      
+      // Facebook: facebook.com/username
+      if (urlObj.hostname.includes('facebook.com')) {
+        const match = pathname.match(/\/([^\/]+)/);
+        return match ? match[1] : null;
+      }
+      
+      // LinkedIn: linkedin.com/in/username
+      if (urlObj.hostname.includes('linkedin.com')) {
+        const match = pathname.match(/\/in\/([^\/]+)/);
+        return match ? match[1] : null;
+      }
+      
+      return null;
+    } catch {
+      return null;
+    }
+  };
+
+  const handleUrlSubmit = () => {
+    if (!profileUrl.trim()) return;
+    
+    const username = extractUsernameFromUrl(profileUrl);
+    if (username) {
+      setProfileData(prev => ({ ...prev, username }));
+      setProfileUrl(''); // Clear URL after extraction
+    }
+  };
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <Paywall
-        productId="ai_profile_verifier"
-        freePreview={freePreview}
-        lockedContent={lockedContent}
-        customTitle="Unlock Profile Checker"
-        customBody="Get access to advanced social profile analysis to detect fake or AI-generated accounts. Included in Standard Plan."
-      />
+    <div className="max-w-4xl mx-auto">
+      {freePreview}
+      {lockedContent}
     </div>
   );
 };

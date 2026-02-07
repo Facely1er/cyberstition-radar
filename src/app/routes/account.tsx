@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { usePreferences } from '../../contexts/PreferencesContext';
-import { Settings, Shield } from 'lucide-react';
+import { Settings, Shield, Download, Info } from 'lucide-react';
+import { brandName, tagline, publisher } from '../config/product';
 
 export default function Preferences() {
   const { preferences, updatePreferences } = usePreferences();
@@ -158,6 +160,38 @@ export default function Preferences() {
                 <option value={90}>90 days</option>
               </select>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="card">
+        <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Download size={20} /> Get the App
+        </h2>
+        <div className="grid" style={{ gap: 12 }}>
+          <Link to="/pricing" className="card" style={{ padding: 16, display: 'block', textDecoration: 'none' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <Download size={20} style={{ color: 'var(--primary)' }} />
+              <div>
+                <div style={{ fontWeight: 600, marginBottom: 4 }}>Purchase the App</div>
+                <div className="small" style={{ opacity: 0.8 }}>
+                  Get full access with a one-time purchase
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      <section className="card">
+        <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Info size={20} /> About
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div>
+            <div style={{ fontWeight: 600, marginBottom: 4 }}>{brandName}</div>
+            <div className="small" style={{ opacity: 0.8, marginBottom: 4 }}>{tagline}</div>
+            <div className="small" style={{ opacity: 0.6 }}>{publisher}</div>
           </div>
         </div>
       </section>

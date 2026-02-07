@@ -11,6 +11,7 @@ import About from './app/routes/about';
 import More from './app/routes/more';
 import Dashboard from './app/routes/dashboard';
 import Account from './app/routes/account';
+import Pricing from './app/routes/pricing';
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/more" element={<More />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AppShell>

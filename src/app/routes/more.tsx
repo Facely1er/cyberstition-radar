@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, BookOpen, LayoutGrid, Settings, LogIn, UserPlus, ChevronRight } from 'lucide-react';
+import { Home, BookOpen, Mail, LayoutGrid, Settings, LogIn, UserPlus, ChevronRight } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import TrustNotice from '../../components/common/TrustNotice';
 
@@ -28,6 +28,12 @@ export default function More() {
             icon={<BookOpen size={16} />}
             title="How it works"
             description="Learn how the indicators are generated."
+          />
+          <MoreLink
+            to="/email"
+            icon={<Mail size={16} />}
+            title="Email Analyzer"
+            description="Check email headers for spoofing and anomalies."
           />
         </div>
       </section>

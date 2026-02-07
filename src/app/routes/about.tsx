@@ -5,17 +5,17 @@ export default function About() {
   return (
     <div className="grid" style={{ gap: 14 }}>
       <section className="card">
-        <h1 className="h1">How Cyberstition works</h1>
+        <h1 className="h1">How Cyberstition Works</h1>
         <p className="p">
-          Cyberstition provides on-device indicators to help you recognize deception and AI-enabled manipulation.
-          It does not monitor your accounts, block messages, or guarantee detection.
+          Cyberstition analyzes content on your device to identify deception and manipulation signals. 
+          It does not monitor accounts, block messages, or guarantee detection.
         </p>
         <hr />
         <ul className="small">
-          <li><strong>On-device</strong>: analysis runs locally in your browser/app session.</li>
-          <li><strong>No collection</strong>: no accounts, no tracking, no uploads to our servers.</li>
-          <li><strong>Indicators</strong>: results are signals to inform your judgment — not certainty.</li>
-          <li><strong>Verify</strong>: when in doubt, verify through an independent channel.</li>
+          <li><strong>On-device processing</strong>: All analysis runs locally in your browser—no server uploads.</li>
+          <li><strong>Privacy-first</strong>: No data collection, tracking, or account monitoring.</li>
+          <li><strong>Indicators only</strong>: Results are signals to inform your judgment, not definitive proof.</li>
+          <li><strong>Independent verification</strong>: Always verify suspicious content through a separate channel.</li>
         </ul>
       </section>
 

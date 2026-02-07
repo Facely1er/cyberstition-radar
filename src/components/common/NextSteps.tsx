@@ -24,25 +24,25 @@ const toolMeta: Record<ToolKey, { label: string; to: string; description: string
   messages: {
     label: 'Message Detective',
     to: '/messages',
-    description: 'Scan message text for scam and manipulation patterns.',
+    description: 'Analyze message content for scam and manipulation patterns.',
     icon: <MessageSquare size={16} />,
   },
   profiles: {
     label: 'Profile Checker',
     to: '/profiles',
-    description: 'Verify the sender profile signals and authenticity.',
+    description: 'Verify profile authenticity and identify deception signals.',
     icon: <Users size={16} />,
   },
   images: {
     label: 'Image Inspector',
     to: '/images',
-    description: 'Check images for metadata and tampering signals.',
+    description: 'Inspect image metadata and detect manipulation indicators.',
     icon: <ImageIcon size={16} />,
   },
   email: {
     label: 'Email Analyzer',
     to: '/email',
-    description: 'Validate email headers for spoofing risks.',
+    description: 'Analyze email headers for spoofing and routing anomalies.',
     icon: <Mail size={16} />,
   },
 };
@@ -62,10 +62,10 @@ const originPriority: Record<Origin, ToolKey | null> = {
 };
 
 const originSummary: Record<Origin, string> = {
-  email: 'Email selected. Confirm the sender and header authenticity.',
-  profile: 'Social profile selected. Verify the sender identity and context.',
-  message: 'Direct message selected. Cross-check the message content and sender.',
-  unknown: 'Not sure. Start with the most common cross-checks.',
+  email: 'Email selected. Verify sender identity and header authenticity.',
+  profile: 'Social profile selected. Verify profile authenticity and context.',
+  message: 'Direct message selected. Cross-check message content and sender identity.',
+  unknown: 'Not sure. Start with the most common verification checks.',
 };
 
 export default function NextSteps({ entryPoint }: { entryPoint: EntryPoint }) {
@@ -97,7 +97,7 @@ export default function NextSteps({ entryPoint }: { entryPoint: EntryPoint }) {
         <Compass size={16} /> Recommended next steps
       </div>
       <p className="small" style={{ marginTop: 6 }}>
-        Choose where the content came from to prioritize the next check.
+        Select the content source to prioritize the next verification step.
       </p>
       <div className="choice-group" role="group" aria-label="Content origin">
         {originOptions.map((option) => (

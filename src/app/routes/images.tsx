@@ -8,7 +8,7 @@ export default function Images() {
     <div className="grid" style={{ gap: 14 }}>
       <section className="card">
         <h1 className="h1">Image Inspector</h1>
-        <p className="p">Upload an image to inspect metadata and common manipulation indicators.</p>
+        <p className="p">Upload an image to inspect metadata and detect manipulation indicators.</p>
       </section>
 
       <section className="card">

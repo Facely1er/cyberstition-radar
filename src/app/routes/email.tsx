@@ -8,7 +8,7 @@ export default function Email() {
     <div className="grid" style={{ gap: 14 }}>
       <section className="card">
         <h1 className="h1">Email Analyzer</h1>
-        <p className="p">Paste email headers to check for spoofing and routing anomalies.</p>
+        <p className="p">Analyze email headers to detect spoofing attempts and routing anomalies.</p>
       </section>
 
       <section className="card">

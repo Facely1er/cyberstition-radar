@@ -64,7 +64,7 @@ export default function Dashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <div className="kicker"><FileText size={16} /> Dashboard</div>
-            <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Your Analysis History</h1>
+            <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Analysis History</h1>
             <p className="p">View and manage your saved reports and documents.</p>
           </div>
           <div style={{ display: 'flex', gap: 12 }}>
@@ -126,7 +126,7 @@ export default function Dashboard() {
                       <FileText size={48} style={{ margin: '0 auto 16px', opacity: 0.3 }} />
                       <p className="p">No reports saved yet.</p>
                       <p className="small" style={{ marginTop: 8, marginBottom: 16 }}>
-                        Use the analysis tools to create and save reports.
+                        Use the analysis tools to create reports. They will appear here once saved.
                       </p>
                       <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap', marginTop: 20 }}>
                         <Link to="/messages" className="btn primary">Start with Messages</Link>
@@ -194,7 +194,7 @@ export default function Dashboard() {
                       <FileText size={48} style={{ margin: '0 auto 16px', opacity: 0.3 }} />
                       <p className="p">No documents saved yet.</p>
                       <p className="small" style={{ marginTop: 8, marginBottom: 16 }}>
-                        Upload documents for analysis and they will appear here.
+                        Documents uploaded for analysis will appear here once saved.
                       </p>
                       <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap', marginTop: 20 }}>
                         <Link to="/images" className="btn primary">Inspect Images</Link>

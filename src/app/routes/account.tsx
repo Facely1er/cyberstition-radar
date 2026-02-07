@@ -15,8 +15,8 @@ export default function Preferences() {
         <div className="kicker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Settings size={16} /> Preferences
         </div>
-        <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Settings</h1>
-        <p className="p">Manage your app preferences and analysis settings.</p>
+        <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Preferences</h1>
+        <p className="p">Configure your analysis preferences and settings.</p>
       </section>
 
       <div className="card" style={{ padding: 16, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
@@ -25,8 +25,8 @@ export default function Preferences() {
           <div>
             <div style={{ fontWeight: 600, marginBottom: 4, color: 'rgb(21 128 61)' }}>Privacy First</div>
             <div className="small" style={{ color: 'rgb(21 128 61)' }}>
-              All your data is stored locally on your device. No information is collected or sent to external servers.
-              Your privacy and security are fully under your control.
+              All data is stored locally on your device. No information is collected or transmitted to external servers. 
+              Your privacy and security remain under your control.
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function Preferences() {
           <Settings size={20} /> Analysis Preferences
         </h2>
         <div className="small" style={{ marginBottom: 16, opacity: 0.8 }}>
-          These settings are stored locally on your device
+          All settings are stored locally on your device.
         </div>
 
         <div className="grid" style={{ gap: 16 }}>
@@ -46,7 +46,7 @@ export default function Preferences() {
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 600, marginBottom: 4 }}>Auto-save Reports</div>
                 <div className="small" style={{ opacity: 0.8 }}>
-                  Automatically save analysis reports to your dashboard
+                  Automatically save analysis reports to your dashboard.
                 </div>
               </div>
               <label style={{ position: 'relative', display: 'inline-block', width: 48, height: 24 }}>
@@ -92,7 +92,7 @@ export default function Preferences() {
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 600, marginBottom: 4 }}>Show Risk Warnings</div>
                 <div className="small" style={{ opacity: 0.8 }}>
-                  Display detailed warnings for high-risk content
+                  Display detailed warnings for high-risk content.
                 </div>
               </div>
               <label style={{ position: 'relative', display: 'inline-block', width: 48, height: 24 }}>
@@ -137,7 +137,7 @@ export default function Preferences() {
             <div>
               <div style={{ fontWeight: 600, marginBottom: 8 }}>Analysis History (Days)</div>
               <div className="small" style={{ opacity: 0.8, marginBottom: 12 }}>
-                Keep analysis history for this many days
+                Retain analysis history for the selected number of days.
               </div>
               <select
                 value={preferences.analysisHistory}
@@ -171,7 +171,7 @@ export default function Preferences() {
           <div>
             <div className="small" style={{ marginBottom: 8, fontWeight: 600 }}>Local Storage Only</div>
             <p className="small" style={{ opacity: 0.8 }}>
-              Your reports, documents, and preferences are stored only in your browser's local storage.
+              Reports, documents, and preferences are stored only in your browser's local storage. 
               No data is transmitted to any server. Clearing your browser data will remove all saved information.
             </p>
           </div>

@@ -10,7 +10,7 @@ export default function Home() {
       <section className="card">
         <h1 className="h1">Question what looks real online.</h1>
         <p className="p">
-          Cyberstition helps you recognize scams, fake profiles, manipulated images, and suspicious emails using on-device indicators.
+          Identify scams, fake profiles, manipulated images, and suspicious emails using on-device analysis. All processing happens locally—no data collection, no tracking.
         </p>
         <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
           <Link className="btn primary" to="/messages">Start with Messages</Link>
@@ -19,20 +19,20 @@ export default function Home() {
       </section>
 
       <div className="grid cols-2">
-        <ToolCard to="/messages" title="Message Detective" desc="Spot scam, phishing, and AI-generated message patterns." icon={<MessageSquare size={18} />} />
-        <ToolCard to="/profiles" title="Profile Checker" desc="Assess whether a social profile looks authentic or deceptive." icon={<User size={18} />} />
-        <ToolCard to="/images" title="Image Inspector" desc="Reveal hidden metadata and manipulation clues in images." icon={<ImageIcon size={18} />} />
-        <ToolCard to="/email" title="Email Analyzer" desc="Analyze email headers for spoofing and anomalies." icon={<Mail size={18} />} />
+        <ToolCard to="/messages" title="Message Detective" desc="Detect scam, phishing, and AI-generated message patterns." icon={<MessageSquare size={18} />} />
+        <ToolCard to="/profiles" title="Profile Checker" desc="Verify social profile authenticity and identify deception signals." icon={<User size={18} />} />
+        <ToolCard to="/images" title="Image Inspector" desc="Inspect metadata and detect manipulation indicators in images." icon={<ImageIcon size={18} />} />
+        <ToolCard to="/email" title="Email Analyzer" desc="Analyze email headers for spoofing and routing anomalies." icon={<Mail size={18} />} />
       </div>
 
       <NextSteps entryPoint="messages" />
 
       <section className="card" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
         <div className="kicker" style={{ color: 'var(--text)' }}>
-          <FileText size={16} /> Your Analysis History
+          <FileText size={16} /> Analysis History
         </div>
         <p className="p" style={{ marginTop: 8 }}>
-          View and manage your saved reports and analysis history.
+          Access your saved reports and analysis history from the dashboard.
         </p>
         <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
           <Link className="btn primary" to="/dashboard">View Dashboard</Link>

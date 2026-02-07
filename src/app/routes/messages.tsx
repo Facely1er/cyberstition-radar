@@ -16,13 +16,13 @@ export default function Messages() {
             👋 Welcome to Cyberstition!
           </div>
           <p className="p" style={{ marginTop: 8, color: 'rgb(21 128 61)' }}>
-            Get started by analyzing a message. After your first check, you'll see recommended next steps to verify other aspects of the content.
+            Analyze a message to get started. After your first check, you'll see recommended next steps to verify other aspects of the content.
           </p>
         </section>
       )}
       <section className="card">
         <h1 className="h1">Message Detective</h1>
-        <p className="p">Paste a message to check for common scam, phishing, or AI-generated manipulation patterns.</p>
+        <p className="p">Analyze message content for scam, phishing, and AI-generated manipulation patterns.</p>
       </section>
 
       <section className="card">

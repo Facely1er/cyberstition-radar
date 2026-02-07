@@ -401,7 +401,7 @@ hr{
 .topnav{
   display:flex;
   align-items:center;
-  gap:2px;
+  gap:0;
 }
 
 .navitem{
@@ -411,7 +411,7 @@ hr{
   font-size:14px;
   font-weight: 500;
   color:var(--text-muted);
-  padding:10px 14px;
+  padding:8px 12px;
   border-radius:12px;
   border:1px solid transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -532,7 +532,7 @@ hr{
 }
 
 .brand strong{
-  font-size:19px;
+  font-size:17px;
   font-weight: 700;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
@@ -543,8 +543,15 @@ hr{
 
 .brand span{
   font-size:12px;
-  color:var(--text-muted);
   font-weight: 500;
+}
+
+.brand-subtitle{
+  color:var(--text-secondary);
+}
+
+.brand-subtext{
+  color:var(--text-muted);
 }
 
 .topnav{
@@ -552,7 +559,7 @@ hr{
   display:flex;
   justify-content: center;
   align-items:center;
-  gap:2px;
+  gap:0;
 }
 
 .footer{
@@ -590,6 +597,22 @@ hr{
   font-size:13px;
   color:var(--text-muted);
   font-weight: 500;
+}
+
+.footer-links{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-size:13px;
+  font-weight: 600;
+}
+
+.footer-link{
+  color:var(--text-secondary);
+}
+
+.footer-link:hover{
+  color:var(--text);
 }
 
 .theme-toggle{
@@ -719,7 +742,7 @@ hr{
   }
 
   .navitem{
-    padding:9px 14px;
+    padding:8px 11px;
     font-size:13px;
     gap:6px;
   }
@@ -770,7 +793,7 @@ hr{
   }
 
   .navitem{
-    padding:8px 12px;
+    padding:7px 10px;
     font-size:12px;
     gap:5px;
   }
@@ -815,11 +838,11 @@ hr{
   }
 
   .brand strong{
-    font-size:16px;
+    font-size:15px;
   }
 
   .navitem{
-    padding:7px 10px;
+    padding:6px 9px;
     font-size:11px;
   }
 

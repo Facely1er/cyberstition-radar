@@ -11,6 +11,7 @@ const EmailHeaderAnalyzer: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
   const [result, setResult] = useState<any>(null);
   const [showHelp, setShowHelp] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const addAlert = useCautionStore((s) => s.addAlert);
 
@@ -280,8 +281,6 @@ const EmailHeaderAnalyzer: React.FC = () => {
       </div>
     </>
   );
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Auto-detect email headers from clipboard on focus
   useEffect(() => {

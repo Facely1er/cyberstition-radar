@@ -18,6 +18,31 @@ const ImageMetadataAnalyzer: React.FC = () => {
 
   const addAlert = useCautionStore((s) => s.addAlert);
 
+  const processFile = (selectedFile: File) => {
+    // Validate file type
+    if (!selectedFile.type.startsWith('image/')) {
+      setError('Please select an image file');
+      return;
+    }
+
+    // Validate file size (max 50MB)
+    if (selectedFile.size > 50 * 1024 * 1024) {
+      setError('File size must be less than 50MB');
+      return;
+    }
+
+    setFile(selectedFile);
+    setError(null);
+    setResult(null);
+
+    // Create preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setPreview(e.target?.result as string);
+    };
+    reader.readAsDataURL(selectedFile);
+  };
+
   // Clipboard paste support
   useEffect(() => {
     const handlePaste = async (e: ClipboardEvent) => {
@@ -80,31 +105,6 @@ const ImageMetadataAnalyzer: React.FC = () => {
       dropZone.removeEventListener('drop', handleDrop);
     };
   }, []);
-
-  const processFile = (selectedFile: File) => {
-    // Validate file type
-    if (!selectedFile.type.startsWith('image/')) {
-      setError('Please select an image file');
-      return;
-    }
-
-    // Validate file size (max 50MB)
-    if (selectedFile.size > 50 * 1024 * 1024) {
-      setError('File size must be less than 50MB');
-      return;
-    }
-
-    setFile(selectedFile);
-    setError(null);
-    setResult(null);
-
-    // Create preview
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setPreview(e.target?.result as string);
-    };
-    reader.readAsDataURL(selectedFile);
-  };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];

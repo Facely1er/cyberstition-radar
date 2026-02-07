@@ -15,6 +15,7 @@ const AICheckMessagePanel: React.FC = () => {
     isPotentialThreat: boolean;
   } | null>(null);
   const [showHelp, setShowHelp] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const addAlert = useCautionStore((s) => s.addAlert);
 
@@ -297,8 +298,6 @@ const AICheckMessagePanel: React.FC = () => {
       </div>
     </>
   );
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Auto-paste from clipboard on focus
   useEffect(() => {

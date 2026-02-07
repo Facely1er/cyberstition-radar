@@ -4,16 +4,12 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { User, Settings, Bell, Shield, Save, AlertCircle } from 'lucide-react';
 
 interface UserPreferences {
-  emailNotifications: boolean;
-  darkModeAuto: boolean;
   saveReportsAutomatically: boolean;
   showRiskWarnings: boolean;
   analysisHistory: number;
 }
 
 const defaultPreferences: UserPreferences = {
-  emailNotifications: true,
-  darkModeAuto: false,
   saveReportsAutomatically: true,
   showRiskWarnings: true,
   analysisHistory: 30,
@@ -66,6 +62,19 @@ export default function Account() {
         <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Your Account</h1>
         <p className="p">Manage your profile, preferences, and security settings.</p>
       </section>
+
+      <div className="card" style={{ padding: 16, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+          <Shield size={20} style={{ color: 'rgb(21 128 61)', marginTop: 2 }} />
+          <div>
+            <div style={{ fontWeight: 600, marginBottom: 4, color: 'rgb(21 128 61)' }}>Privacy First</div>
+            <div className="small" style={{ color: 'rgb(21 128 61)' }}>
+              All your data is stored locally on your device. No information is collected or sent to external servers.
+              Your privacy and security are fully under your control.
+            </div>
+          </div>
+        </div>
+      </div>
 
       {message && (
         <div
@@ -151,52 +160,6 @@ export default function Account() {
         </div>
 
         <div className="grid" style={{ gap: 16 }}>
-          <div className="card" style={{ padding: 16 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 600, marginBottom: 4 }}>Email Notifications</div>
-                <div className="small" style={{ opacity: 0.8 }}>
-                  Receive email alerts for important security updates
-                </div>
-              </div>
-              <label style={{ position: 'relative', display: 'inline-block', width: 48, height: 24 }}>
-                <input
-                  type="checkbox"
-                  checked={preferences.emailNotifications}
-                  onChange={(e) => handlePreferenceChange('emailNotifications', e.target.checked)}
-                  style={{ opacity: 0, width: 0, height: 0 }}
-                />
-                <span
-                  style={{
-                    position: 'absolute',
-                    cursor: 'pointer',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: preferences.emailNotifications ? 'var(--primary)' : '#ccc',
-                    transition: '0.3s',
-                    borderRadius: 24,
-                  }}
-                >
-                  <span
-                    style={{
-                      position: 'absolute',
-                      content: '',
-                      height: 18,
-                      width: 18,
-                      left: preferences.emailNotifications ? 26 : 3,
-                      bottom: 3,
-                      backgroundColor: 'white',
-                      transition: '0.3s',
-                      borderRadius: '50%',
-                    }}
-                  />
-                </span>
-              </label>
-            </div>
-          </div>
-
           <div className="card" style={{ padding: 16 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div style={{ flex: 1 }}>
@@ -320,26 +283,25 @@ export default function Account() {
 
       <section className="card">
         <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Shield size={20} /> Security
+          <Shield size={20} /> Security & Privacy
         </h2>
 
         <div className="grid" style={{ gap: 12 }}>
-          <div className="card" style={{ padding: 12, backgroundColor: 'rgb(254 249 195)', border: '1px solid rgb(250 204 21)' }}>
-            <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-              <AlertCircle size={16} style={{ marginTop: 2, color: 'rgb(161 98 7)' }} />
-              <div className="small" style={{ color: 'rgb(113 63 18)' }}>
-                Password reset and two-factor authentication features coming soon.
-              </div>
-            </div>
+          <div>
+            <div className="small" style={{ marginBottom: 8, fontWeight: 600 }}>Local Storage Only</div>
+            <p className="small" style={{ opacity: 0.8 }}>
+              Your account data, reports, and preferences are stored only in your browser's local storage.
+              No data is transmitted to any server. Clearing your browser data will remove all saved information.
+            </p>
           </div>
 
           <div>
             <div className="small" style={{ marginBottom: 8, fontWeight: 600 }}>Security Tips</div>
             <ul className="small" style={{ paddingLeft: 20, opacity: 0.8 }}>
-              <li>Use a strong, unique password</li>
-              <li>Never share your login credentials</li>
+              <li>Use a strong password for your account</li>
               <li>Sign out when using shared devices</li>
               <li>Be cautious of phishing attempts</li>
+              <li>Regularly review your saved reports</li>
             </ul>
           </div>
         </div>

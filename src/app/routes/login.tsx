@@ -38,6 +38,12 @@ export default function Login() {
         <h1 className="h1" style={{ fontSize: 28, marginTop: 10 }}>Welcome back</h1>
         <p className="p">Sign in to access your saved reports and documents.</p>
 
+        <div className="card" style={{ padding: 12, marginTop: 16, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
+          <div className="small" style={{ color: 'rgb(21 128 61)' }}>
+            Your account is stored locally on this device. No data is sent to any server.
+          </div>
+        </div>
+
         <form onSubmit={handleSubmit} style={{ marginTop: 24 }}>
           {error && (
             <div className="card" style={{

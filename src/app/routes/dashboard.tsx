@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { supabase } from '../../lib/supabase';
-import { FileText, Trash2, User, LogOut, Clock, AlertCircle, Settings } from 'lucide-react';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { FileText, Trash2, User, LogOut, Clock, Settings } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 
 interface Report {
   id: string;
+  user_id: string;
   title: string;
   tool_type: string;
   risk_level: string;
@@ -15,6 +16,7 @@ interface Report {
 
 interface Document {
   id: string;
+  user_id: string;
   title: string;
   description: string;
   file_type: string;
@@ -23,63 +25,23 @@ interface Document {
 
 export default function Dashboard() {
   const { user, profile, signOut } = useAuth();
-  const [reports, setReports] = useState<Report[]>([]);
-  const [documents, setDocuments] = useState<Document[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [allReports, setAllReports] = useLocalStorage<Report[]>('cyberstition_reports', []);
+  const [allDocuments, setAllDocuments] = useLocalStorage<Document[]>('cyberstition_documents', []);
+  const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<'reports' | 'documents' | 'profile'>('reports');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loadData();
-  }, [user]);
+  const userReports = allReports.filter((r) => r.user_id === user?.id);
+  const userDocuments = allDocuments.filter((d) => d.user_id === user?.id);
 
-  const loadData = async () => {
-    if (!user) return;
-
-    setLoading(true);
-    try {
-      const [reportsResult, documentsResult] = await Promise.all([
-        supabase
-          .from('reports')
-          .select('*')
-          .order('created_at', { ascending: false }),
-        supabase
-          .from('documents')
-          .select('*')
-          .order('created_at', { ascending: false }),
-      ]);
-
-      if (reportsResult.data) setReports(reportsResult.data);
-      if (documentsResult.data) setDocuments(documentsResult.data);
-    } catch (error) {
-      console.error('Error loading data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const deleteReport = async (id: string) => {
+  const deleteReport = (id: string) => {
     if (!confirm('Are you sure you want to delete this report?')) return;
-
-    try {
-      const { error } = await supabase.from('reports').delete().eq('id', id);
-      if (error) throw error;
-      setReports(reports.filter((r) => r.id !== id));
-    } catch (error) {
-      console.error('Error deleting report:', error);
-    }
+    setAllReports(allReports.filter((r) => r.id !== id));
   };
 
-  const deleteDocument = async (id: string) => {
+  const deleteDocument = (id: string) => {
     if (!confirm('Are you sure you want to delete this document?')) return;
-
-    try {
-      const { error } = await supabase.from('documents').delete().eq('id', id);
-      if (error) throw error;
-      setDocuments(documents.filter((d) => d.id !== id));
-    } catch (error) {
-      console.error('Error deleting document:', error);
-    }
+    setAllDocuments(allDocuments.filter((d) => d.id !== id));
   };
 
   const handleSignOut = async () => {
@@ -141,7 +103,7 @@ export default function Dashboard() {
               cursor: 'pointer',
             }}
           >
-            Reports ({reports.length})
+            Reports ({userReports.length})
           </button>
           <button
             onClick={() => setActiveTab('documents')}
@@ -156,7 +118,7 @@ export default function Dashboard() {
               cursor: 'pointer',
             }}
           >
-            Documents ({documents.length})
+            Documents ({userDocuments.length})
           </button>
           <button
             onClick={() => setActiveTab('profile')}
@@ -184,7 +146,7 @@ export default function Dashboard() {
             <>
               {activeTab === 'reports' && (
                 <div>
-                  {reports.length === 0 ? (
+                  {userReports.length === 0 ? (
                     <div style={{ textAlign: 'center', padding: 40 }}>
                       <FileText size={48} style={{ margin: '0 auto 16px', opacity: 0.3 }} />
                       <p className="p">No reports saved yet.</p>
@@ -194,7 +156,7 @@ export default function Dashboard() {
                     </div>
                   ) : (
                     <div className="grid" style={{ gap: 12 }}>
-                      {reports.map((report) => (
+                      {userReports.map((report) => (
                         <div
                           key={report.id}
                           className="card"
@@ -246,7 +208,7 @@ export default function Dashboard() {
 
               {activeTab === 'documents' && (
                 <div>
-                  {documents.length === 0 ? (
+                  {userDocuments.length === 0 ? (
                     <div style={{ textAlign: 'center', padding: 40 }}>
                       <FileText size={48} style={{ margin: '0 auto 16px', opacity: 0.3 }} />
                       <p className="p">No documents saved yet.</p>
@@ -256,7 +218,7 @@ export default function Dashboard() {
                     </div>
                   ) : (
                     <div className="grid" style={{ gap: 12 }}>
-                      {documents.map((doc) => (
+                      {userDocuments.map((doc) => (
                         <div
                           key={doc.id}
                           className="card"
@@ -311,6 +273,11 @@ export default function Dashboard() {
                     <div>
                       <div className="small" style={{ marginBottom: 8, fontWeight: 600 }}>Account Created</div>
                       <div className="p">{profile?.created_at ? formatDate(profile.created_at) : 'N/A'}</div>
+                    </div>
+                    <div className="card" style={{ padding: 12, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
+                      <div className="small" style={{ color: 'rgb(21 128 61)' }}>
+                        All your data is stored locally on your device. No information is sent to external servers.
+                      </div>
                     </div>
                     <Link to="/account" className="btn primary" style={{ width: 'fit-content', display: 'flex', gap: 8, alignItems: 'center' }}>
                       <Settings size={16} /> Manage Account Settings

@@ -38,10 +38,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
           <nav className="topnav" aria-label="Primary">
             <NavItem to="/" label="Home" icon={<HomeIcon size={18} />} end />
+            <NavItem to="/email" label="Email" icon={<Mail size={18} />} />
             <NavItem to="/messages" label="Messages" icon={<MessageSquare size={18} />} />
             <NavItem to="/profiles" label="Profiles" icon={<Users size={18} />} />
             <NavItem to="/images" label="Images" icon={<ImageIcon size={18} />} />
-            <NavItem to="/email" label="Email" icon={<Mail size={18} />} />
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: 'auto' }}>
@@ -51,7 +51,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               className={({ isActive }) => `btn ${isActive ? 'primary' : ''}`}
               aria-label="Account"
             >
-              <User size={16} /> Account
+              <User size={16} />
             </NavLink>
           </div>
         </div>

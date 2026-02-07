@@ -35,8 +35,8 @@ export default function Login() {
         <div className="kicker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <LogIn size={16} /> Sign In
         </div>
-        <h1 className="h1" style={{ fontSize: 28, marginTop: 10 }}>Welcome back</h1>
-        <p className="p">Sign in to access your saved reports and documents.</p>
+        <h1 className="h1" style={{ fontSize: 28, marginTop: 10 }}>Your Account</h1>
+        <p className="p">Sign in to access your saved reports and documents, or create a new account.</p>
 
         <div className="card" style={{ padding: 12, marginTop: 16, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
           <div className="small" style={{ color: 'rgb(21 128 61)' }}>
@@ -108,8 +108,11 @@ export default function Login() {
           </button>
         </form>
 
-        <div className="small" style={{ textAlign: 'center', marginTop: 16 }}>
-          Don't have an account? <Link to="/signup" style={{ color: 'var(--primary)', fontWeight: 500 }}>Create one</Link>
+        <div style={{ textAlign: 'center', marginTop: 20, paddingTop: 20, borderTop: '1px solid #e0e0e0' }}>
+          <div className="small" style={{ marginBottom: 10, opacity: 0.8 }}>Don't have an account?</div>
+          <Link to="/signup" className="btn" style={{ width: '100%' }}>
+            Create Account
+          </Link>
         </div>
       </section>
     </div>

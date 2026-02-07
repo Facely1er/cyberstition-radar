@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Home as HomeIcon, MessageSquare, Settings, Users, Image as ImageIcon, Mail, MoreHorizontal, FileText } from 'lucide-react';
 import ThemeToggle from '../../components/common/ThemeToggle';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,8 +96,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 }
 
 function NavItem({ to, label, icon, end }: { to: string; label: string; icon: React.ReactNode; end?: boolean }) {
+  const location = useLocation();
+  const isActive = end 
+    ? location.pathname === to
+    : location.pathname.startsWith(to);
+  
   return (
-    <NavLink to={to} end={end} className={({ isActive }) => `navitem ${isActive ? 'active' : ''}`}>
+    <NavLink to={to} end={end} className={`navitem ${isActive ? 'active' : ''}`}>
       {icon}
       <span>{label}</span>
     </NavLink>

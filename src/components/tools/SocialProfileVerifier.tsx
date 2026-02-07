@@ -124,7 +124,7 @@ const SocialProfileVerifier: React.FC = () => {
   // Free preview (description and privacy notice)
   const freePreview = (
     <div className="mb-8">
-      <p className="text-gray-600 dark:text-gray-400 mb-6" style={{ fontSize: '15px', lineHeight: '1.6' }}>
+      <p className="p mb-6">
         Enter profile information to analyze for fake, bot, or AI-generated account indicators
       </p>
       {/* Privacy Notice */}
@@ -132,7 +132,7 @@ const SocialProfileVerifier: React.FC = () => {
         <div className="flex items-start gap-3">
           <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
-            <p className="text-sm text-blue-900 dark:text-blue-200 leading-relaxed" style={{ margin: 0 }}>
+            <p className="info-box-text text-blue-900 dark:text-blue-200" style={{ margin: 0 }}>
               <span className="font-semibold">Privacy First:</span>{' '}
               All analysis happens in your browser. Profile data never leaves your device.
             </p>
@@ -148,7 +148,7 @@ const SocialProfileVerifier: React.FC = () => {
       {/* URL Input for Quick Fill */}
       <div className="form-section" style={{ marginBottom: '16px' }}>
         <div className="form-field-group" style={{ marginBottom: '16px' }}>
-          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+          <label className="form-label">
             Quick Fill: Paste Profile URL (Twitter, Instagram, Facebook, LinkedIn)
           </label>
           <div className="flex gap-3">
@@ -168,14 +168,14 @@ const SocialProfileVerifier: React.FC = () => {
                 }, 0);
               }}
               placeholder="https://twitter.com/username or https://instagram.com/username"
-              className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
             <button
               onClick={handleUrlSubmit}
               disabled={!profileUrl.trim()}
-              className="px-5 py-3 bg-cyan-600 text-white rounded-lg text-sm font-medium
+              className="px-5 py-3 bg-cyan-600 text-white rounded-lg text-base font-medium
                          hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Extract
@@ -191,14 +191,14 @@ const SocialProfileVerifier: React.FC = () => {
       <div className="form-section">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="form-field-group">
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            <label className="form-label">
               Username
             </label>
             <input
               type="text"
               value={profileData.username}
               onChange={(e) => handleChange('username', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="@username"
@@ -206,14 +206,14 @@ const SocialProfileVerifier: React.FC = () => {
           </div>
 
           <div className="form-field-group">
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            <label className="form-label">
               Display Name
             </label>
             <input
               type="text"
               value={profileData.displayName}
               onChange={(e) => handleChange('displayName', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="Display Name"
@@ -221,14 +221,14 @@ const SocialProfileVerifier: React.FC = () => {
           </div>
 
           <div className="md:col-span-2 form-field-group">
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            <label className="form-label">
               Bio/Description
             </label>
             <textarea
               value={profileData.bio}
               onChange={(e) => handleChange('bio', e.target.value)}
               rows={3}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="Profile bio or description"
@@ -236,14 +236,14 @@ const SocialProfileVerifier: React.FC = () => {
           </div>
 
           <div className="form-field-group">
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            <label className="form-label">
               Account Age (days)
             </label>
             <input
               type="number"
               value={profileData.accountAge}
               onChange={(e) => handleChange('accountAge', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="365"
@@ -251,14 +251,14 @@ const SocialProfileVerifier: React.FC = () => {
           </div>
 
           <div className="form-field-group">
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            <label className="form-label">
               Post Count
             </label>
             <input
               type="number"
               value={profileData.postCount}
               onChange={(e) => handleChange('postCount', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="0"
@@ -266,14 +266,14 @@ const SocialProfileVerifier: React.FC = () => {
           </div>
 
           <div className="form-field-group">
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            <label className="form-label">
               Followers
             </label>
             <input
               type="number"
               value={profileData.followerCount}
               onChange={(e) => handleChange('followerCount', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="0"
@@ -281,14 +281,14 @@ const SocialProfileVerifier: React.FC = () => {
           </div>
 
           <div className="form-field-group">
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            <label className="form-label">
               Following
             </label>
             <input
               type="number"
               value={profileData.followingCount}
               onChange={(e) => handleChange('followingCount', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="0"
@@ -296,14 +296,14 @@ const SocialProfileVerifier: React.FC = () => {
           </div>
 
           <div className="form-field-group">
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            <label className="form-label">
               Website
             </label>
             <input
               type="text"
               value={profileData.website}
               onChange={(e) => handleChange('website', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-base
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="https://example.com"
@@ -319,7 +319,7 @@ const SocialProfileVerifier: React.FC = () => {
                 onChange={(e) => handleChange('verified', e.target.checked)}
                 className="h-4 w-4 text-cyan-500 focus:ring-cyan-500 border-gray-300 rounded"
               />
-              <label htmlFor="verified" className="ml-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
+              <label htmlFor="verified" className="ml-3 form-label" style={{ marginBottom: 0 }}>
                 Account is verified
               </label>
             </div>
@@ -330,7 +330,7 @@ const SocialProfileVerifier: React.FC = () => {
           <button
             onClick={handleAnalyze}
             disabled={!profileData.username && !profileData.displayName}
-            className={`flex-1 inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-medium transition-colors ${
+            className={`flex-1 inline-flex items-center justify-center px-6 py-3 rounded-lg text-base font-medium transition-colors ${
               !profileData.username && !profileData.displayName
                 ? 'bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-cyan-600 to-teal-600 text-white hover:from-cyan-500 hover:to-teal-500 shadow-lg hover:shadow-cyan-500/30 transition-all duration-200 hover:scale-[1.02]'

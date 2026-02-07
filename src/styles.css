@@ -335,6 +335,44 @@ hr{
   line-height:1.5;
 }
 
+/* Standardized Text Sizes */
+.text-xs {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.text-sm {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.text-base {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.text-lg {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Form Labels - Standardized */
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Info Box Text */
+.info-box-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Button Text - Already defined in .btn but ensure consistency */
+
 .notice{
   border:1px solid var(--border);
   background: var(--bg-secondary);

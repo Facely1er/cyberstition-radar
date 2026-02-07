@@ -430,14 +430,14 @@ hr{
 }
 
 .brand strong{
-  font-size:17px;
+  font-size:15px;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text);
 }
 
 .header .brand strong{
-  font-size:12px;
+  font-size:15px;
 }
 
 .brand span{
@@ -447,8 +447,8 @@ hr{
 }
 
 .brand-subtitle{
-  color:var(--text);
   font-size:13px;
+  color:var(--text-secondary);
 }
 
 .brand-subtext{
@@ -646,15 +646,19 @@ hr{
   }
 
   .brand strong{
-    font-size:15px;
+    font-size:14px;
   }
 
   .header .brand strong{
-    font-size:15px;
+    font-size:14px;
   }
 
   .brand span{
     font-size:10px;
+  }
+
+  .brand-subtitle{
+    font-size:11px;
   }
 
   .brand-text{
@@ -778,15 +782,23 @@ hr{
   }
 
   .brand strong{
-    font-size:14px;
+    font-size:12px;
   }
 
   .header .brand strong{
-    font-size:14px;
+    font-size:12px;
   }
 
   .brand span{
     font-size:9px;
+  }
+
+  .brand-subtitle{
+    font-size:10px;
+  }
+
+  .brand-subtitle{
+    font-size:10px;
   }
 
   .brand-logo{

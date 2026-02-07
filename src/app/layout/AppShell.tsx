@@ -44,7 +44,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <NavItem to="/images" label="Images" icon={<ImageIcon size={18} />} />
           </nav>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: 'auto' }}>
+          <div className="header-actions">
             <ThemeToggle />
             <NavLink
               to={user ? "/dashboard" : "/login"}

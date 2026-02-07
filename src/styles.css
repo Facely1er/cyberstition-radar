@@ -443,6 +443,7 @@ hr{
 .brand span{
   font-size:12px;
   font-weight: 500;
+  display:block;
 }
 
 .brand-subtitle{
@@ -459,6 +460,24 @@ hr{
   justify-content: center;
   align-items:center;
   gap:6px;
+}
+
+.header-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.header-actions .btn{
+  width:38px;
+  height:38px;
+  min-width:38px;
+  padding:0;
+  border-radius:12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .bottomnav{
@@ -606,6 +625,11 @@ hr{
     padding:14px 20px;
   }
 
+  .brand-logo{
+    width:40px;
+    height:40px;
+  }
+
   .topnav{
     display:none;
   }
@@ -620,8 +644,21 @@ hr{
     display:none;
   }
 
+  .brand strong{
+    font-size:15px;
+  }
+
+  .header .brand strong{
+    font-size:15px;
+  }
+
   .brand span{
-    display:none;
+    font-size:10px;
+  }
+
+  .brand-text{
+    line-height:1.2;
+    gap:1px;
   }
 
   .bottomnav{
@@ -711,6 +748,12 @@ hr{
     height:36px;
   }
 
+  .header-actions .btn{
+    width:36px;
+    height:36px;
+    min-width:36px;
+  }
+
   .theme-toggle svg{
     width:16px;
     height:16px;
@@ -731,6 +774,23 @@ hr{
   .h1{
     font-size:clamp(24px, 6vw, 32px);
     margin-bottom:12px;
+  }
+
+  .brand strong{
+    font-size:14px;
+  }
+
+  .header .brand strong{
+    font-size:14px;
+  }
+
+  .brand span{
+    font-size:9px;
+  }
+
+  .brand-logo{
+    width:36px;
+    height:36px;
   }
 
   .bottomnav{
@@ -754,16 +814,20 @@ hr{
   }
 
   .brand-logo{
-    width:40px !important;
-    height:40px !important;
+    width:32px !important;
+    height:32px !important;
   }
 
   .brand strong{
-    font-size:15px;
+    font-size:13px;
   }
 
   .header .brand strong{
-    font-size:15px;
+    font-size:13px;
+  }
+
+  .brand span{
+    font-size:9px;
   }
 
   .navitem{
@@ -774,6 +838,12 @@ hr{
   .theme-toggle{
     width:34px;
     height:34px;
+  }
+
+  .header-actions .btn{
+    width:34px;
+    height:34px;
+    min-width:34px;
   }
 
   .theme-toggle svg{

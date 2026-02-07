@@ -5,7 +5,7 @@ import { priceLabel } from '../config/product';
 
 export default function About() {
   return (
-    <div className="grid" style={{ gap: 14 }}>
+    <div className="grid">
       <section className="card">
         <h1 className="h1">How Cyberstition Works</h1>
         <p className="p">

@@ -9,9 +9,9 @@ export default function Messages() {
   const isWelcome = (location.state as any)?.welcome;
 
   return (
-    <div className="grid" style={{ gap: 14 }}>
+    <div className="grid">
       {isWelcome && (
-        <section className="card" style={{ backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
+        <section className="card section-spacing" style={{ backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
           <div className="kicker" style={{ color: 'rgb(21 128 61)' }}>
             👋 Welcome to Cyberstition!
           </div>
@@ -20,12 +20,12 @@ export default function Messages() {
           </p>
         </section>
       )}
-      <section className="card">
+      <section className="card section-spacing">
         <h1 className="h1">Message Detective</h1>
         <p className="p">Analyze message content for scam, phishing, and AI-generated manipulation patterns.</p>
       </section>
 
-      <section className="card">
+      <section className="card section-spacing">
         <AICheckMessagePanel />
       </section>
 

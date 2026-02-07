@@ -123,16 +123,21 @@ const SocialProfileVerifier: React.FC = () => {
 
   // Free preview (description and privacy notice)
   const freePreview = (
-    <div className="mb-6">
-      <p className="text-gray-600 dark:text-gray-400 mb-4">
+    <div className="mb-8">
+      <p className="text-gray-600 dark:text-gray-400 mb-6" style={{ fontSize: '15px', lineHeight: '1.6' }}>
         Enter profile information to analyze for fake, bot, or AI-generated account indicators
       </p>
       {/* Privacy Notice */}
-      <div className="flex items-start space-x-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-        <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
-        <p className="text-sm text-blue-800 dark:text-blue-300">
-          <strong>Privacy First:</strong> All analysis happens in your browser. Profile data never leaves your device.
-        </p>
+      <div className="info-box primary">
+        <div className="flex items-start gap-3">
+          <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+          <div className="flex-1">
+            <p className="text-sm text-blue-900 dark:text-blue-200 leading-relaxed" style={{ margin: 0 }}>
+              <span className="font-semibold">Privacy First:</span>{' '}
+              All analysis happens in your browser. Profile data never leaves your device.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -141,179 +146,183 @@ const SocialProfileVerifier: React.FC = () => {
   const lockedContent = (
     <>
       {/* URL Input for Quick Fill */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Quick Fill: Paste Profile URL (Twitter, Instagram, Facebook, LinkedIn)
-        </label>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={profileUrl}
-            onChange={(e) => setProfileUrl(e.target.value)}
-            onPaste={(e) => {
-              const pastedUrl = e.clipboardData.getData('text');
-              setTimeout(() => {
-                setProfileUrl(pastedUrl);
-                const username = extractUsernameFromUrl(pastedUrl);
-                if (username) {
-                  setProfileData(prev => ({ ...prev, username }));
-                  setProfileUrl('');
-                }
-              }, 0);
-            }}
-            placeholder="https://twitter.com/username or https://instagram.com/username"
-            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
-                       bg-white dark:bg-gray-900 text-gray-900 dark:text-white
-                       focus:outline-none focus:ring-2 focus:ring-cyan-500"
-          />
-          <button
-            onClick={handleUrlSubmit}
-            disabled={!profileUrl.trim()}
-            className="px-4 py-2 bg-cyan-600 text-white rounded-lg text-sm font-medium
-                       hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Extract
-          </button>
+      <div className="form-section" style={{ marginBottom: '16px' }}>
+        <div className="form-field-group" style={{ marginBottom: '16px' }}>
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
+            Quick Fill: Paste Profile URL (Twitter, Instagram, Facebook, LinkedIn)
+          </label>
+          <div className="flex gap-3">
+            <input
+              type="text"
+              value={profileUrl}
+              onChange={(e) => setProfileUrl(e.target.value)}
+              onPaste={(e) => {
+                const pastedUrl = e.clipboardData.getData('text');
+                setTimeout(() => {
+                  setProfileUrl(pastedUrl);
+                  const username = extractUsernameFromUrl(pastedUrl);
+                  if (username) {
+                    setProfileData(prev => ({ ...prev, username }));
+                    setProfileUrl('');
+                  }
+                }, 0);
+              }}
+              placeholder="https://twitter.com/username or https://instagram.com/username"
+              className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
+                         bg-white dark:bg-gray-900 text-gray-900 dark:text-white
+                         focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            />
+            <button
+              onClick={handleUrlSubmit}
+              disabled={!profileUrl.trim()}
+              className="px-5 py-3 bg-cyan-600 text-white rounded-lg text-sm font-medium
+                         hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Extract
+            </button>
+          </div>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">
+            Automatically extracts username from profile URLs
+          </p>
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-          Automatically extracts username from profile URLs
-        </p>
       </div>
 
       {/* Input Form */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 space-y-4 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+      <div className="form-section">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="form-field-group">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
               Username
             </label>
             <input
               type="text"
               value={profileData.username}
               onChange={(e) => handleChange('username', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="@username"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <div className="form-field-group">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
               Display Name
             </label>
             <input
               type="text"
               value={profileData.displayName}
               onChange={(e) => handleChange('displayName', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="Display Name"
             />
           </div>
 
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <div className="md:col-span-2 form-field-group">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
               Bio/Description
             </label>
             <textarea
               value={profileData.bio}
               onChange={(e) => handleChange('bio', e.target.value)}
               rows={3}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="Profile bio or description"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <div className="form-field-group">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
               Account Age (days)
             </label>
             <input
               type="number"
               value={profileData.accountAge}
               onChange={(e) => handleChange('accountAge', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="365"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <div className="form-field-group">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
               Post Count
             </label>
             <input
               type="number"
               value={profileData.postCount}
               onChange={(e) => handleChange('postCount', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="0"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <div className="form-field-group">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
               Followers
             </label>
             <input
               type="number"
               value={profileData.followerCount}
               onChange={(e) => handleChange('followerCount', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="0"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <div className="form-field-group">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
               Following
             </label>
             <input
               type="number"
               value={profileData.followingCount}
               onChange={(e) => handleChange('followingCount', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="0"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <div className="form-field-group">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300" style={{ marginBottom: '6px' }}>
               Website
             </label>
             <input
               type="text"
               value={profileData.website}
               onChange={(e) => handleChange('website', e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm
                          bg-white dark:bg-gray-900 text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="https://example.com"
             />
           </div>
 
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="verified"
-              checked={profileData.verified}
-              onChange={(e) => handleChange('verified', e.target.checked)}
-              className="h-4 w-4 text-cyan-500 focus:ring-cyan-500 border-gray-300 rounded"
-            />
-            <label htmlFor="verified" className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              Account is verified
-            </label>
+          <div className="md:col-span-2 form-field-group" style={{ marginTop: '8px', marginBottom: '0' }}>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="verified"
+                checked={profileData.verified}
+                onChange={(e) => handleChange('verified', e.target.checked)}
+                className="h-4 w-4 text-cyan-500 focus:ring-cyan-500 border-gray-300 rounded"
+              />
+              <label htmlFor="verified" className="ml-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Account is verified
+              </label>
+            </div>
           </div>
         </div>
 

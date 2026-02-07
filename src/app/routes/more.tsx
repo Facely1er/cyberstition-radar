@@ -5,7 +5,7 @@ import TrustNotice from '../../components/common/TrustNotice';
 
 export default function More() {
   return (
-    <div className="grid" style={{ gap: 14 }}>
+    <div className="grid">
       <section className="card">
         <h1 className="h1">More</h1>
         <p className="p">Quick access to information and settings.</p>

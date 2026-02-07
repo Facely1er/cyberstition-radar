@@ -15,7 +15,7 @@ export default function Home() {
   // Web build: Landing page only
   if (IS_WEB_BUILD) {
     return (
-      <div className="grid" style={{ gap: 14 }}>
+      <div className="grid">
         <section className="card">
           <h1 className="h1">Question what looks real online.</h1>
           <p className="p">
@@ -70,7 +70,7 @@ export default function Home() {
 
   // App build: Full functionality
   return (
-    <div className="grid" style={{ gap: 14 }}>
+    <div className="grid" style={{ gap: 24 }}>
       <section className="card">
         <h1 className="h1">Question what looks real online.</h1>
         <p className="p">

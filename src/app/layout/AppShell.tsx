@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Home as HomeIcon, MessageSquare, User, Image as ImageIcon, Mail, Info } from 'lucide-react';
+import { Home as HomeIcon, MessageSquare, User, Image as ImageIcon, Mail, Info, LogIn, UserPlus, LayoutDashboard } from 'lucide-react';
 import ThemeToggle from '../../components/common/ThemeToggle';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
+  const { user } = useAuth();
   const title = getTitle(pathname);
   const [scrolled, setScrolled] = useState(false);
 
@@ -48,6 +50,20 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <NavLink to="/about" className={({ isActive }) => `btn ${isActive ? 'primary' : ''}`} aria-label="About">
               <Info size={16} /> About
             </NavLink>
+            {user ? (
+              <NavLink to="/dashboard" className={({ isActive }) => `btn ${isActive ? 'primary' : ''}`} aria-label="Dashboard">
+                <LayoutDashboard size={16} /> Dashboard
+              </NavLink>
+            ) : (
+              <>
+                <NavLink to="/login" className={({ isActive }) => `btn ${isActive ? 'primary' : ''}`} aria-label="Sign In">
+                  <LogIn size={16} /> Sign In
+                </NavLink>
+                <NavLink to="/signup" className="btn primary" aria-label="Sign Up">
+                  <UserPlus size={16} /> Sign Up
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -86,5 +102,9 @@ function getTitle(pathname: string) {
   if (pathname.startsWith('/images')) return 'Image Inspector';
   if (pathname.startsWith('/email')) return 'Email Analyzer';
   if (pathname.startsWith('/about')) return 'How it works';
+  if (pathname.startsWith('/dashboard')) return 'Dashboard';
+  if (pathname.startsWith('/account')) return 'Account Settings';
+  if (pathname.startsWith('/login')) return 'Sign In';
+  if (pathname.startsWith('/signup')) return 'Create Account';
   return 'Digital Safety Kit';
 }

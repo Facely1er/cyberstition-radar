@@ -83,18 +83,14 @@ const SocialProfileVerifier: React.FC = () => {
 
   const riskLevel = result ? getProfileRiskLevel(result.riskScore) : null;
 
-  // Free preview (header and description)
+  // Free preview (description and privacy notice)
   const freePreview = (
     <div className="mb-8">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
-        <User className="h-8 w-8 text-cyan-500 mr-3" />
-        Social Profile Verifier
-      </h1>
-      <p className="text-gray-600 dark:text-gray-400">
+      <p className="text-gray-600 dark:text-gray-400 mb-4">
         Enter profile information to analyze for fake, bot, or AI-generated account indicators
       </p>
       {/* Privacy Notice */}
-      <div className="flex items-start space-x-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg mt-4">
+      <div className="flex items-start space-x-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
         <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
         <p className="text-sm text-blue-800 dark:text-blue-300">
           <strong>Privacy First:</strong> All analysis happens in your browser. Profile data never leaves your device.
@@ -375,7 +371,7 @@ const SocialProfileVerifier: React.FC = () => {
         productId="ai_profile_verifier"
         freePreview={freePreview}
         lockedContent={lockedContent}
-        customTitle="Unlock AI Social Profile Verifier"
+        customTitle="Unlock Profile Checker"
         customBody="Get access to advanced social profile analysis to detect fake or AI-generated accounts. Included in Standard Plan."
       />
     </div>

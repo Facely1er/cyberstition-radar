@@ -50,20 +50,12 @@ const EmailHeaderAnalyzer: React.FC = () => {
 
   const riskLevel = result ? getEmailRiskLevel(result.riskScore) : null;
 
-  // Free preview (header and description)
+  // Free preview (description and privacy notice)
   const freePreview = (
     <div className="mb-8">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
-            <Mail className="h-8 w-8 text-cyan-500 mr-3" />
-            Email Header Analyzer
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Paste email headers to analyze for spoofing, authentication failures, and phishing indicators
-          </p>
-        </div>
-      </div>
+      <p className="text-gray-600 dark:text-gray-400 mb-4">
+        Paste email headers to analyze for spoofing, authentication failures, and phishing indicators
+      </p>
       {/* Privacy Notice */}
       <div className="flex items-start space-x-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
         <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
@@ -284,7 +276,7 @@ const EmailHeaderAnalyzer: React.FC = () => {
         productId="ai_email_analyzer"
         freePreview={freePreview}
         lockedContent={lockedContent}
-        customTitle="Unlock AI Email Header Analyzer"
+        customTitle="Unlock Email Analyzer"
         customBody="Get access to advanced email header analysis to detect phishing and spoofing indicators. Included in Standard Plan."
       />
     </div>

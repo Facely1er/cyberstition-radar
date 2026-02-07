@@ -47,22 +47,16 @@ const AICheckMessagePanel: React.FC = () => {
   const disabled = !text.trim();
   const charCount = text.length;
 
-  // Free preview (header + privacy notice)
+  // Free preview (description + privacy notice)
   const freePreview = (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
-            <Brain className="h-8 w-8 text-cyan-500 mr-3" />
-            Message Detective
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Paste suspicious messages to surface common phishing, scam, and manipulation patterns.
-          </p>
-        </div>
+        <p className="text-gray-600 dark:text-gray-400">
+          Paste suspicious messages to surface common phishing, scam, and manipulation patterns.
+        </p>
         <button
           onClick={() => setShowHelp(!showHelp)}
-          className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ml-4 flex-shrink-0"
           title="Show help"
         >
           <HelpCircle className="h-6 w-6 text-gray-500" />

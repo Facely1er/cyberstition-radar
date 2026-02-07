@@ -88,18 +88,14 @@ const ImageMetadataAnalyzer: React.FC = () => {
 
   const riskLevel = result ? getImageRiskLevel(result.riskScore) : null;
 
-  // Free preview (header and description)
+  // Free preview (description and privacy notice)
   const freePreview = (
     <div className="mb-8">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
-        <Image className="h-8 w-8 text-cyan-500 mr-3" />
-        Image Metadata Analyzer
-      </h1>
-      <p className="text-gray-600 dark:text-gray-400">
+      <p className="text-gray-600 dark:text-gray-400 mb-4">
         Upload an image to analyze its metadata for signs of manipulation or suspicious patterns
       </p>
       {/* Privacy Notice */}
-      <div className="flex items-start space-x-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg mt-4">
+      <div className="flex items-start space-x-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
         <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
         <p className="text-sm text-blue-800 dark:text-blue-300">
           <strong>Privacy First:</strong> All analysis happens in your browser. Your image never leaves your device.
@@ -284,7 +280,7 @@ const ImageMetadataAnalyzer: React.FC = () => {
         productId="ai_image_analyzer"
         freePreview={freePreview}
         lockedContent={lockedContent}
-        customTitle="Unlock AI Image Analyzer"
+        customTitle="Unlock Image Inspector"
         customBody="Get access to advanced image metadata analysis to detect manipulation and suspicious patterns. Included in Standard Plan."
       />
     </div>

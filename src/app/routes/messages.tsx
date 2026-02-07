@@ -1,6 +1,7 @@
 import React from 'react';
 import TrustNotice from '../../components/common/TrustNotice';
 import AICheckMessagePanel from '../../components/tools/AICheckMessagePanel';
+import NextSteps from '../../components/common/NextSteps';
 
 export default function Messages() {
   return (
@@ -13,6 +14,8 @@ export default function Messages() {
       <section className="card">
         <AICheckMessagePanel />
       </section>
+
+      <NextSteps entryPoint="messages" />
 
       <TrustNotice />
     </div>

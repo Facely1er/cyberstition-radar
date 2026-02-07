@@ -1,6 +1,7 @@
 import React from 'react';
 import TrustNotice from '../../components/common/TrustNotice';
 import ImageMetadataAnalyzer from '../../components/tools/ImageMetadataAnalyzer';
+import NextSteps from '../../components/common/NextSteps';
 
 export default function Images() {
   return (
@@ -13,6 +14,8 @@ export default function Images() {
       <section className="card">
         <ImageMetadataAnalyzer />
       </section>
+
+      <NextSteps entryPoint="images" />
 
       <TrustNotice />
     </div>

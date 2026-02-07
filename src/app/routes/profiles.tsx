@@ -1,6 +1,7 @@
 import React from 'react';
 import TrustNotice from '../../components/common/TrustNotice';
 import SocialProfileVerifier from '../../components/tools/SocialProfileVerifier';
+import NextSteps from '../../components/common/NextSteps';
 
 export default function Profiles() {
   return (
@@ -13,6 +14,8 @@ export default function Profiles() {
       <section className="card">
         <SocialProfileVerifier />
       </section>
+
+      <NextSteps entryPoint="profiles" />
 
       <TrustNotice />
     </div>

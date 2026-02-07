@@ -541,6 +541,10 @@ hr{
   background-clip: text;
 }
 
+.header .brand strong{
+  font-size:16px;
+}
+
 .brand span{
   font-size:12px;
   font-weight: 500;
@@ -838,6 +842,10 @@ hr{
   }
 
   .brand strong{
+    font-size:15px;
+  }
+
+  .header .brand strong{
     font-size:15px;
   }
 

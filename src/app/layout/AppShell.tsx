@@ -51,7 +51,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               className={({ isActive }) => `btn ${isActive ? 'primary' : ''}`}
               aria-label="Account"
             >
-              <User size={16} /> Account
+              <User size={16} />
             </NavLink>
           </div>
         </div>

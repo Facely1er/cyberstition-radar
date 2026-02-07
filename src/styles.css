@@ -620,8 +620,20 @@ hr{
     display:none;
   }
 
+  .brand strong{
+    font-size:15px;
+  }
+
+  .header .brand strong{
+    font-size:15px;
+  }
+
   .brand span{
-    display:none;
+    font-size:10px;
+  }
+
+  .brand-text{
+    line-height:1.1;
   }
 
   .bottomnav{
@@ -733,6 +745,18 @@ hr{
     margin-bottom:12px;
   }
 
+  .brand strong{
+    font-size:14px;
+  }
+
+  .header .brand strong{
+    font-size:14px;
+  }
+
+  .brand span{
+    font-size:9px;
+  }
+
   .bottomnav{
     height:68px;
     padding:6px 12px calc(6px + env(safe-area-inset-bottom));
@@ -754,16 +778,20 @@ hr{
   }
 
   .brand-logo{
-    width:40px !important;
-    height:40px !important;
+    width:34px !important;
+    height:34px !important;
   }
 
   .brand strong{
-    font-size:15px;
+    font-size:13px;
   }
 
   .header .brand strong{
-    font-size:15px;
+    font-size:13px;
+  }
+
+  .brand span{
+    font-size:8px;
   }
 
   .navitem{

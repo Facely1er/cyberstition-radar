@@ -1,9 +1,8 @@
-import { useAuth } from '../contexts/AuthContext';
 import { useLocalStorage } from './useLocalStorage';
+import { usePreferences } from '../contexts/PreferencesContext';
 
 interface Report {
   id: string;
-  user_id: string;
   title: string;
   tool_type: 'messages' | 'profiles' | 'images' | 'email';
   content: any;
@@ -12,7 +11,7 @@ interface Report {
 }
 
 export function useReports() {
-  const { user } = useAuth();
+  const { preferences } = usePreferences();
   const [reports, setReports] = useLocalStorage<Report[]>('cyberstition_reports', []);
 
   const saveReport = async (
@@ -21,14 +20,14 @@ export function useReports() {
     content: any,
     riskLevel: 'low' | 'medium' | 'high'
   ) => {
-    if (!user) {
-      return { error: new Error('Must be logged in to save reports') };
+    // Only save if auto-save is enabled
+    if (!preferences.saveReportsAutomatically) {
+      return { data: null, error: null };
     }
 
     try {
       const newReport: Report = {
         id: `report_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        user_id: user.id,
         title,
         tool_type: toolType,
         content,

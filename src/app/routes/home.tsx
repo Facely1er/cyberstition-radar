@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MessageSquare, User, Image as ImageIcon, Mail, Sparkles } from 'lucide-react';
+import { MessageSquare, User, Image as ImageIcon, Mail, FileText } from 'lucide-react';
 import TrustNotice from '../../components/common/TrustNotice';
+import NextSteps from '../../components/common/NextSteps';
 
 export default function Home() {
   return (
@@ -23,6 +24,21 @@ export default function Home() {
         <ToolCard to="/images" title="Image Inspector" desc="Reveal hidden metadata and manipulation clues in images." icon={<ImageIcon size={18} />} />
         <ToolCard to="/email" title="Email Analyzer" desc="Analyze email headers for spoofing and anomalies." icon={<Mail size={18} />} />
       </div>
+
+      <NextSteps entryPoint="messages" />
+
+      <section className="card" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
+        <div className="kicker" style={{ color: 'var(--text)' }}>
+          <FileText size={16} /> Your Analysis History
+        </div>
+        <p className="p" style={{ marginTop: 8 }}>
+          View and manage your saved reports and analysis history.
+        </p>
+        <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
+          <Link className="btn primary" to="/dashboard">View Dashboard</Link>
+          <Link className="btn" to="/account">Preferences</Link>
+        </div>
+      </section>
 
       <TrustNotice />
     </div>

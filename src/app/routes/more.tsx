@@ -1,17 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, BookOpen, LayoutGrid, Settings, LogIn, UserPlus, ChevronRight } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import { Home, BookOpen, LayoutGrid, Settings, ChevronRight } from 'lucide-react';
 import TrustNotice from '../../components/common/TrustNotice';
 
 export default function More() {
-  const { user } = useAuth();
-
   return (
     <div className="grid" style={{ gap: 14 }}>
       <section className="card">
         <h1 className="h1">More</h1>
-        <p className="p">Quick links to learn more and manage your account.</p>
+        <p className="p">Quick links to learn more and manage your preferences.</p>
       </section>
 
       <section className="card">
@@ -33,39 +30,20 @@ export default function More() {
       </section>
 
       <section className="card">
-        <div className="kicker" style={{ color: 'var(--text)' }}>Account</div>
+        <div className="kicker" style={{ color: 'var(--text)' }}>Manage</div>
         <div className="link-list" style={{ marginTop: 12 }}>
-          {user ? (
-            <>
-              <MoreLink
-                to="/dashboard"
-                icon={<LayoutGrid size={16} />}
-                title="Dashboard"
-                description="Review saved reports and documents."
-              />
-              <MoreLink
-                to="/account"
-                icon={<Settings size={16} />}
-                title="Account settings"
-                description="Update your profile and preferences."
-              />
-            </>
-          ) : (
-            <>
-              <MoreLink
-                to="/login"
-                icon={<LogIn size={16} />}
-                title="Log in"
-                description="Access your saved reports and settings."
-              />
-              <MoreLink
-                to="/signup"
-                icon={<UserPlus size={16} />}
-                title="Create account"
-                description="Set up an account for saved analysis history."
-              />
-            </>
-          )}
+          <MoreLink
+            to="/dashboard"
+            icon={<LayoutGrid size={16} />}
+            title="Dashboard"
+            description="Review saved reports and documents."
+          />
+          <MoreLink
+            to="/account"
+            icon={<Settings size={16} />}
+            title="Preferences"
+            description="Update your app preferences and settings."
+          />
         </div>
       </section>
 

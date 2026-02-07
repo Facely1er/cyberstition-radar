@@ -1,66 +1,22 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { User, Settings, Bell, Shield, Save, AlertCircle } from 'lucide-react';
+import React from 'react';
+import { usePreferences } from '../../contexts/PreferencesContext';
+import { Settings, Shield } from 'lucide-react';
 
-interface UserPreferences {
-  saveReportsAutomatically: boolean;
-  showRiskWarnings: boolean;
-  analysisHistory: number;
-}
+export default function Preferences() {
+  const { preferences, updatePreferences } = usePreferences();
 
-const defaultPreferences: UserPreferences = {
-  saveReportsAutomatically: true,
-  showRiskWarnings: true,
-  analysisHistory: 30,
-};
-
-export default function Account() {
-  const { profile, updateProfile } = useAuth();
-  const [preferences, setPreferences] = useLocalStorage<UserPreferences>(
-    'cyberstition_preferences',
-    defaultPreferences
-  );
-  const [fullName, setFullName] = useState(profile?.full_name || '');
-  const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState('');
-
-  const handleUpdateProfile = async () => {
-    setSaving(true);
-    setMessage('');
-
-    const { error } = await updateProfile({ full_name: fullName });
-
-    if (error) {
-      setMessage('Error updating profile');
-    } else {
-      setMessage('Profile updated successfully');
-    }
-
-    setSaving(false);
-    setTimeout(() => setMessage(''), 3000);
-  };
-
-  const handlePreferenceChange = (key: keyof UserPreferences, value: boolean | number) => {
-    setPreferences({ ...preferences, [key]: value });
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+  const handlePreferenceChange = (key: keyof typeof preferences, value: boolean | number) => {
+    updatePreferences({ [key]: value });
   };
 
   return (
     <div className="grid" style={{ gap: 14 }}>
       <section className="card">
         <div className="kicker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <User size={16} /> Account Settings
+          <Settings size={16} /> Preferences
         </div>
-        <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Your Account</h1>
-        <p className="p">Manage your profile, preferences, and security settings.</p>
+        <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Settings</h1>
+        <p className="p">Manage your app preferences and analysis settings.</p>
       </section>
 
       <div className="card" style={{ padding: 16, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
@@ -76,84 +32,9 @@ export default function Account() {
         </div>
       </div>
 
-      {message && (
-        <div
-          className="card"
-          style={{
-            padding: 12,
-            border: message.includes('Error') ? '1px solid rgb(239 68 68)' : '1px solid rgb(34 197 94)',
-            backgroundColor: message.includes('Error') ? 'rgb(254 242 242)' : 'rgb(240 253 244)',
-          }}
-        >
-          <div
-            className="small"
-            style={{
-              color: message.includes('Error') ? 'rgb(153 27 27)' : 'rgb(21 128 61)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-            }}
-          >
-            <AlertCircle size={16} /> {message}
-          </div>
-        </div>
-      )}
-
       <section className="card">
         <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <User size={20} /> Profile Information
-        </h2>
-
-        <div className="grid" style={{ gap: 16 }}>
-          <div>
-            <label htmlFor="fullName" className="small" style={{ display: 'block', marginBottom: 6, fontWeight: 600 }}>
-              Full Name
-            </label>
-            <input
-              id="fullName"
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px 12px',
-                border: '1px solid #e0e0e0',
-                borderRadius: 6,
-                fontSize: 15,
-              }}
-            />
-          </div>
-
-          <div>
-            <div className="small" style={{ marginBottom: 8, fontWeight: 600 }}>Email Address</div>
-            <div className="p" style={{ padding: '10px 12px', backgroundColor: '#f5f5f5', borderRadius: 6 }}>
-              {profile?.email}
-            </div>
-            <div className="small" style={{ marginTop: 4, opacity: 0.7 }}>
-              Email cannot be changed at this time
-            </div>
-          </div>
-
-          <div>
-            <div className="small" style={{ marginBottom: 8, fontWeight: 600 }}>Account Created</div>
-            <div className="p">{profile?.created_at ? formatDate(profile.created_at) : 'N/A'}</div>
-          </div>
-
-          <button
-            onClick={handleUpdateProfile}
-            disabled={saving || fullName === profile?.full_name}
-            className="btn primary"
-            style={{ display: 'flex', alignItems: 'center', gap: 8, width: 'fit-content' }}
-          >
-            <Save size={16} />
-            {saving ? 'Saving...' : 'Save Changes'}
-          </button>
-        </div>
-      </section>
-
-      <section className="card">
-        <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Settings size={20} /> Preferences
+          <Settings size={20} /> Analysis Preferences
         </h2>
         <div className="small" style={{ marginBottom: 16, opacity: 0.8 }}>
           These settings are stored locally on your device
@@ -290,7 +171,7 @@ export default function Account() {
           <div>
             <div className="small" style={{ marginBottom: 8, fontWeight: 600 }}>Local Storage Only</div>
             <p className="small" style={{ opacity: 0.8 }}>
-              Your account data, reports, and preferences are stored only in your browser's local storage.
+              Your reports, documents, and preferences are stored only in your browser's local storage.
               No data is transmitted to any server. Clearing your browser data will remove all saved information.
             </p>
           </div>
@@ -298,10 +179,10 @@ export default function Account() {
           <div>
             <div className="small" style={{ marginBottom: 8, fontWeight: 600 }}>Security Tips</div>
             <ul className="small" style={{ paddingLeft: 20, opacity: 0.8 }}>
-              <li>Use a strong password for your account</li>
-              <li>Sign out when using shared devices</li>
               <li>Be cautious of phishing attempts</li>
               <li>Regularly review your saved reports</li>
+              <li>Clear data when using shared devices</li>
+              <li>Back up important reports if needed</li>
             </ul>
           </div>
         </div>

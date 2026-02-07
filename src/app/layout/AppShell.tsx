@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home as HomeIcon, MessageSquare, User, Users, Image as ImageIcon, Mail, MoreHorizontal } from 'lucide-react';
+import { Home as HomeIcon, MessageSquare, Settings, Users, Image as ImageIcon, Mail, MoreHorizontal, FileText } from 'lucide-react';
 import ThemeToggle from '../../components/common/ThemeToggle';
-import { useAuth } from '../../contexts/AuthContext';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -47,11 +45,20 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           <div className="header-actions">
             <ThemeToggle />
             <NavLink
-              to={user ? "/dashboard" : "/login"}
+              to="/dashboard"
               className={({ isActive }) => `btn ${isActive ? 'primary' : ''}`}
-              aria-label="Account"
+              aria-label="Dashboard"
+              title="View Analysis History"
             >
-              <User size={16} />
+              <FileText size={16} />
+            </NavLink>
+            <NavLink
+              to="/account"
+              className={({ isActive }) => `btn ${isActive ? 'primary' : ''}`}
+              aria-label="Preferences"
+              title="Preferences"
+            >
+              <Settings size={16} />
             </NavLink>
           </div>
         </div>
@@ -60,6 +67,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <main className="container app-main">{children}</main>
 
       <nav className="bottomnav" aria-label="Primary">
+        <NavItem to="/" label="Home" icon={<HomeIcon size={18} />} end />
         <NavItem to="/messages" label="Messages" icon={<MessageSquare size={18} />} />
         <NavItem to="/profiles" label="Profiles" icon={<Users size={18} />} />
         <NavItem to="/images" label="Images" icon={<ImageIcon size={18} />} />

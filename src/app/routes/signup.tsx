@@ -29,7 +29,8 @@ export default function Signup() {
       setError(error.message);
       setLoading(false);
     } else {
-      navigate('/dashboard');
+      // Redirect to home after signup (though signup shouldn't be accessible)
+      navigate('/');
     }
   };
 

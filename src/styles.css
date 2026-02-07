@@ -498,7 +498,7 @@ hr{
 .header .inner{
   max-width:1240px;
   margin:0 auto;
-  padding:16px 24px;
+  padding:10px 24px;
   display:flex;
   align-items:center;
   gap:20px;
@@ -552,9 +552,12 @@ hr{
   display:block;
 }
 
-.brand-subtitle{
-  font-size:18px;
+.brand-subtitle,
+.brand .brand-subtitle,
+.brand-text .brand-subtitle{
+  font-size:13px !important;
   color:var(--text-secondary);
+  font-weight: 500;
 }
 
 .brand-subtext{
@@ -729,7 +732,7 @@ hr{
 @media (max-width: 768px) {
   .header .inner{
     gap:12px;
-    padding:14px 20px;
+    padding:8px 20px;
   }
 
   .brand-logo{
@@ -763,8 +766,10 @@ hr{
     font-size:10px;
   }
 
-  .brand-subtitle{
-    font-size:16px;
+  .brand-subtitle,
+  .brand .brand-subtitle,
+  .brand-text .brand-subtitle{
+    font-size:12px !important;
   }
 
   .brand-text{
@@ -841,7 +846,7 @@ hr{
 @media (max-width: 640px) {
   .header .inner{
     gap:10px;
-    padding:12px 18px;
+    padding:8px 18px;
   }
 
   .topnav{
@@ -899,12 +904,10 @@ hr{
     font-size:9px;
   }
 
-  .brand-subtitle{
-    font-size:15px;
-  }
-
-  .brand-subtitle{
-    font-size:15px;
+  .brand-subtitle,
+  .brand .brand-subtitle,
+  .brand-text .brand-subtitle{
+    font-size:11px !important;
   }
 
   .brand-logo{
@@ -929,7 +932,7 @@ hr{
 @media (max-width: 480px) {
   .header .inner{
     gap:8px;
-    padding:12px 16px;
+    padding:8px 16px;
   }
 
   .brand-logo{

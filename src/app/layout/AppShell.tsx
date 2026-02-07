@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Home as HomeIcon, MessageSquare, User, Image as ImageIcon, Mail, Info } from 'lucide-react';
 import ThemeToggle from '../../components/common/ThemeToggle';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
-  const { pathname } = useLocation();
   const { user } = useAuth();
-  const title = getTitle(pathname);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -32,7 +30,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               />
               <div className="brand-text">
                 <strong>Cyberstition™</strong>
-                <span>{title}</span>
+                <span>Risk signals</span>
+                <span>by ERMITS</span>
               </div>
             </div>
           </NavLink>
@@ -87,17 +86,4 @@ function NavItem({ to, label, icon, end }: { to: string; label: string; icon: Re
       <span>{label}</span>
     </NavLink>
   );
-}
-
-function getTitle(pathname: string) {
-  if (pathname.startsWith('/messages')) return 'Message Detective';
-  if (pathname.startsWith('/profiles')) return 'Profile Checker';
-  if (pathname.startsWith('/images')) return 'Image Inspector';
-  if (pathname.startsWith('/email')) return 'Email Analyzer';
-  if (pathname.startsWith('/about')) return 'How it works';
-  if (pathname.startsWith('/dashboard')) return 'Dashboard';
-  if (pathname.startsWith('/account')) return 'Account Settings';
-  if (pathname.startsWith('/login')) return 'Account';
-  if (pathname.startsWith('/signup')) return 'Create Account';
-  return 'Digital Safety Kit';
 }

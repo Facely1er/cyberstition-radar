@@ -411,7 +411,7 @@ hr{
   font-size:14px;
   font-weight: 500;
   color:var(--text-muted);
-  padding:8px 12px;
+  padding:8px 12px 6px;
   border-radius:12px;
   border:1px solid transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -513,8 +513,8 @@ hr{
 }
 
 .brand-logo{
-  width:42px;
-  height:42px;
+  width:48px;
+  height:48px;
   border-radius:10px;
   transition: transform 0.2s ease;
   box-shadow: 0 2px 12px rgba(155,125,212,.25);
@@ -742,7 +742,7 @@ hr{
   }
 
   .navitem{
-    padding:8px 11px;
+    padding:8px 11px 6px;
     font-size:13px;
     gap:6px;
   }
@@ -793,7 +793,7 @@ hr{
   }
 
   .navitem{
-    padding:7px 10px;
+    padding:7px 10px 5px;
     font-size:12px;
     gap:5px;
   }
@@ -833,8 +833,8 @@ hr{
   }
 
   .brand-logo{
-    width:36px !important;
-    height:36px !important;
+    width:40px !important;
+    height:40px !important;
   }
 
   .brand strong{
@@ -842,7 +842,7 @@ hr{
   }
 
   .navitem{
-    padding:6px 9px;
+    padding:6px 9px 4px;
     font-size:11px;
   }
 

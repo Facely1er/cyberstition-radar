@@ -343,7 +343,7 @@ const SocialProfileVerifier: React.FC = () => {
           <button
             onClick={handleClear}
             disabled={!profileData.username && !result}
-            className="inline-flex items-center px-6 py-3 rounded-lg text-sm font-medium 
+            className="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium 
                        border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 
                        hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors
                        disabled:opacity-50 disabled:cursor-not-allowed"

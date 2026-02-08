@@ -156,7 +156,7 @@ const ImageMetadataAnalyzer: React.FC = () => {
         <div className="flex items-start gap-3">
           <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
-            <p className="text-sm text-blue-900 dark:text-blue-200 leading-relaxed" style={{ margin: 0 }}>
+            <p className="info-box-text text-blue-900 dark:text-blue-200" style={{ margin: 0 }}>
               <span className="font-semibold">Privacy First:</span>{' '}
               All analysis happens in your browser. Your image never leaves your device.
             </p>

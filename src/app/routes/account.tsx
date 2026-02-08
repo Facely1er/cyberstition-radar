@@ -17,7 +17,7 @@ export default function Preferences() {
         <div className="kicker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Settings size={16} /> Preferences
         </div>
-        <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Preferences</h1>
+        <h1 className="h1">Preferences</h1>
         <p className="p">Configure your analysis preferences and settings.</p>
       </section>
 

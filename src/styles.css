@@ -288,12 +288,12 @@ a.card{
 
 .input, textarea{
   width:100%;
-  padding:14px 18px;
+  padding:12px 16px;
   border-radius:12px;
   border:1px solid var(--border);
   background: var(--bg-secondary);
   color:var(--text);
-  font-size: 14px;
+  font-size: 15px;
   font-family: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   box-shadow: none;

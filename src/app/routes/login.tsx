@@ -35,7 +35,7 @@ export default function Login() {
         <div className="kicker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <LogIn size={16} /> Sign In
         </div>
-        <h1 className="h1" style={{ fontSize: 28, marginTop: 10 }}>Your Account</h1>
+        <h1 className="h1" style={{ marginTop: 10 }}>Your Account</h1>
         <p className="p">Sign in to access your saved reports and documents, or create a new account.</p>
 
         <div className="card" style={{ padding: 12, marginTop: 16, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>

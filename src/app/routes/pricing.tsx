@@ -24,7 +24,7 @@ export default function Pricing() {
         <div className="kicker" style={{ color: 'var(--primary)' }}>
           {priceLabel}
         </div>
-        <h2 style={{ fontSize: 24, fontWeight: 600, marginTop: 8 }}>Full Access</h2>
+        <h2 className="h2" style={{ marginTop: 8 }}>Full Access</h2>
         <ul style={{ marginTop: 16, paddingLeft: 0, listStyle: 'none' }}>
           <li style={{ marginBottom: 12, display: 'flex', alignItems: 'start', gap: 12 }}>
             <Check size={18} style={{ color: 'var(--primary)', flexShrink: 0, marginTop: 2 }} />

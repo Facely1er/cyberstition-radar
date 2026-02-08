@@ -40,7 +40,7 @@ export default function Signup() {
         <div className="kicker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <UserPlus size={16} /> Create Account
         </div>
-        <h1 className="h1" style={{ fontSize: 28, marginTop: 10 }}>Get started</h1>
+        <h1 className="h1" style={{ marginTop: 10 }}>Get started</h1>
         <p className="p">Create an account to save reports and manage your analysis history.</p>
 
         <div className="card" style={{ padding: 12, marginTop: 16, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>

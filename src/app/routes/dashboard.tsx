@@ -111,7 +111,7 @@ export default function Dashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <div className="kicker"><FileText size={16} /> Dashboard</div>
-            <h1 className="h1" style={{ fontSize: 28, marginTop: 8 }}>Analysis History</h1>
+            <h1 className="h1">Analysis History</h1>
             <p className="p">View and manage your saved reports and documents.</p>
           </div>
           <div style={{ display: 'flex', gap: 12 }}>
@@ -213,7 +213,7 @@ export default function Dashboard() {
                         >
                           <div style={{ flex: 1 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                              <h3 style={{ fontSize: 16, fontWeight: 600, margin: 0 }}>{report.title}</h3>
+                              <h3 className="h3" style={{ margin: 0 }}>{report.title}</h3>
                               <span
                                 className="badge"
                                 style={{
@@ -279,7 +279,7 @@ export default function Dashboard() {
                           }}
                         >
                           <div style={{ flex: 1 }}>
-                            <h3 style={{ fontSize: 16, fontWeight: 600, margin: 0 }}>{doc.title}</h3>
+                            <h3 className="h3" style={{ margin: 0 }}>{doc.title}</h3>
                             <p className="small" style={{ marginTop: 4, opacity: 0.8 }}>
                               {doc.description || 'No description'}
                             </p>

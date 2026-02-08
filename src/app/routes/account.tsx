@@ -145,7 +145,7 @@ export default function Preferences() {
                 value={preferences.analysisHistory}
                 onChange={(e) => handlePreferenceChange('analysisHistory', Number(e.target.value))}
                 className="input"
-                style={{ fontSize: 15 }}
+                className="input"
               >
                 <option value={7}>7 days</option>
                 <option value={14}>14 days</option>

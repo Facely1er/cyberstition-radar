@@ -66,13 +66,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              style={{
-                width: '100%',
-                padding: '10px 12px',
-                border: '1px solid #e0e0e0',
-                borderRadius: 6,
-                fontSize: 15,
-              }}
+              className="input"
               placeholder="you@example.com"
             />
           </div>
@@ -87,13 +81,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              style={{
-                width: '100%',
-                padding: '10px 12px',
-                border: '1px solid #e0e0e0',
-                borderRadius: 6,
-                fontSize: 15,
-              }}
+              className="input"
               placeholder="Enter your password"
             />
           </div>

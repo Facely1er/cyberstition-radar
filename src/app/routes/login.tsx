@@ -35,7 +35,7 @@ export default function Login() {
         <div className="kicker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <LogIn size={16} /> Sign In
         </div>
-        <h1 className="h1" style={{ marginTop: 10 }}>Your Account</h1>
+        <h1 className="h1" style={{ fontSize: 28, marginTop: 10 }}>Your Account</h1>
         <p className="p">Sign in to access your saved reports and documents, or create a new account.</p>
 
         <div className="card" style={{ padding: 12, marginTop: 16, backgroundColor: 'rgb(240 253 244)', border: '1px solid rgb(34 197 94)' }}>
@@ -66,7 +66,13 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="input"
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                border: '1px solid #e0e0e0',
+                borderRadius: 6,
+                fontSize: 15,
+              }}
               placeholder="you@example.com"
             />
           </div>
@@ -81,7 +87,13 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="input"
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                border: '1px solid #e0e0e0',
+                borderRadius: 6,
+                fontSize: 15,
+              }}
               placeholder="Enter your password"
             />
           </div>
